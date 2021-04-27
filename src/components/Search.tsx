@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from './Button';
 import './Search.css';
 
 interface SearchProps {
@@ -10,17 +11,22 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
 
   const [keywords, setKeywords] = useState<string>("");
 
+  const submitButtonProps = {
+    click: () => {onSubmit(keywords)},
+    text: "Submit"
+  }
+
   return (
     <div>
-      <input 
+      <input className="searchBar"
       value={keywords}
       placeholder={defaultText}
       onChange={(e) => setKeywords(e.target.value)}
       ></input>
-      <button 
-        onClick={() => {onSubmit(keywords)}}>
-        Submit
-      </button>
+      <Button 
+        {...submitButtonProps}
+      >
+      </Button>
     </div>
 
   );
