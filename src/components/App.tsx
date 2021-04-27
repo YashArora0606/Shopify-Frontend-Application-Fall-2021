@@ -4,9 +4,16 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="header">
-        HEADER Text
-      </header>
+      {/* <header className="item">
+        Header Text
+      </header> */}
+
+      <div className="content">
+        <p>
+          content
+        </p>
+
+      </div>
     </div>
   );
 }
