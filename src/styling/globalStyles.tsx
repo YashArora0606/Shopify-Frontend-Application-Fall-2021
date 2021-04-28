@@ -10,9 +10,8 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
 
   body {
     background: ${({ theme }) => theme.backgroundColor};
-    color: ${({ theme }) => theme.textColor};
-    display: flex;
-    font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: ${({ theme }) => theme.primaryTextColor};
+    font-family: 'Lato', sans-serif;
   }`;
 
   export default GlobalStyles;

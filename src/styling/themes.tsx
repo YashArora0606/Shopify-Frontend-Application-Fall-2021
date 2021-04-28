@@ -1,11 +1,19 @@
 const lightTheme = {
-    backgroundColor: "white",
-    textColor: "black"
+    backgroundColor: "#e6e6e6",
+    primaryTextColor: "#ffffff",
+    secondaryTextColor: "#ffffff",
+    primary: "#2abf2d",
+    secondary: "#000000",
+    containerColor: "#ffffff"
 }
   
 const darkTheme = {
-    backgroundColor: "black",
-    textColor: "white"
+    backgroundColor: "#e6e6e6",
+    primaryTextColor: "#ffffff",
+    secondaryTextColor: "#ffffff",
+    primary: "#2abf2d",
+    secondary: "#000000",
+    containerColor: "#ffffff"
 }
 
 type ThemeType = typeof lightTheme;

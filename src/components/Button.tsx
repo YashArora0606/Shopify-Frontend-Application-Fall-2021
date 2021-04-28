@@ -2,29 +2,37 @@ import React, { useContext } from 'react';
 import './Button.css';
 
 import { ThemeContext } from 'styled-components';
+import { ThemeType } from '../styling/themes';
 
 interface ButtonProps {
     text?: string;
-    backgroundColor?: string;
-    textColor?: string;
     click: () => void;
+    type: ButtonType;
+    additionalClassName?: string;
 }
 
-const Button = ({ text, click } : ButtonProps) => {
+export enum ButtonType {
+    Primary,
+    Secondary
+}
 
-    const theme = useContext(ThemeContext);
+const Button = ({ text, click, type, additionalClassName } : ButtonProps) => {
 
+    const theme = useContext<ThemeType>(ThemeContext);
+    
     return (
         <div>
             <button
-                className="button"
+                className={"button " + additionalClassName}
                 onClick={click}
                 style={{ 
-                    backgroundColor: theme.backgroundColor,
-                    color: theme.textColor
+                    backgroundColor: type === ButtonType.Primary ? theme.primary : theme.secondary,
+                    color: type === ButtonType.Primary ? theme.primaryTextColor : theme.secondaryTextColor
                 }}
             >
+            <b>
                 {text}
+            </b>
             </button>
         </div>
 
