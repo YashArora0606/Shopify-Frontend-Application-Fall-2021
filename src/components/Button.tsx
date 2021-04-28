@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import './Button.css';
+import './Button.scss';
 
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';
 
 interface ButtonProps {
     text?: string;
-    click: () => void;
+    click: () => any;
     type: ButtonType;
     additionalClassName?: string;
 }

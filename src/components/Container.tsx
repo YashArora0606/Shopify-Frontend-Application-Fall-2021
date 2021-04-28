@@ -1,5 +1,5 @@
 import React, { ReactFragment, useContext } from 'react';
-import './Container.css';
+import './Container.scss';
 
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';

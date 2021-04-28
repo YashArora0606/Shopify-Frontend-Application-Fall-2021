@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button, { ButtonType } from './Button';
 import Container from './Container';
-import './Search.css';
+import './Search.scss';
 
 interface SearchProps {
   onSubmit: (keywords: string) => Promise<void>;
@@ -20,10 +20,16 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
   }
 
   const resetButtonProps = {
-    click: () => {},
+    click: () => {setKeywords("")},
     text: "Reset",
     type: ButtonType.Secondary,
     additionalClassName: "resetButton" 
+  }
+
+  const submitOnEnter = (event: { key: string; }) => {
+    if (event.key === 'Enter') {
+      onSubmit(keywords);
+    }
   }
 
   return (
@@ -32,6 +38,7 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
         value={keywords}
         placeholder={defaultText}
         onChange={(e) => setKeywords(e.target.value)}
+        onKeyDown={submitOnEnter}
         ></input>
         <div className="buttonArea">
           <Button
@@ -41,6 +48,8 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
             {...submitButtonProps}
           />
         </div>
+
+
       </Container>
   );
 }

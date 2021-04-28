@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, ThemeType } from '../styling/themes';
 
 import { getMoviesByKeywords } from '../services/omdb.service';
-import './App.css';
+import './App.scss';
 import Search from './Search';
 import Container from './Container';
 
@@ -55,6 +55,10 @@ const App = () => {
       <Fragment>
         <div className="App">
           <div className="content">
+
+            <header>
+              The Shoppies
+            </header>
 
             <Search
               onSubmit={makeMovieSearchQuery}
