@@ -60,7 +60,6 @@ const App = () => {
           <div className="content">
             <Search
               onSubmit={makeMovieSearchQuery}
-              defaultText="Search for a movie!"
             ></Search>
             {moviesSearchResults && moviesSearchResults.map((entry: any) => {
               return <span key={entry.imdbID}>{entry.Title}</span>

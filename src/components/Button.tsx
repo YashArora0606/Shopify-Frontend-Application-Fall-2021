@@ -1,15 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import './Button.scss';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';
 import { useState } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTimes)
 
 interface ButtonProps {
     text?: string;
     click: () => any;
     type: ButtonType;
     additionalClassName?: string;
+    icon?: string;
 }
 
 export enum ButtonType {
@@ -18,7 +24,7 @@ export enum ButtonType {
     Blank
 }
 
-const Button = ({ text, click, type, additionalClassName } : ButtonProps) => {
+const Button = ({ text, click, type, additionalClassName, icon} : ButtonProps) => {
 
     const [style, setStyle] = useState({});    
     const theme = useContext<ThemeType>(ThemeContext);
@@ -68,6 +74,7 @@ const Button = ({ text, click, type, additionalClassName } : ButtonProps) => {
                 onClick={click}
                 style={style}
             >
+                {icon && <FontAwesomeIcon icon={icon as IconProp} />}
                 {text}
             </button>
         </div>
