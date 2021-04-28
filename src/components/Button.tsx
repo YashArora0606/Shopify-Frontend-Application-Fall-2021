@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Button.scss';
 
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';
+import { useState } from 'react';
 
 interface ButtonProps {
     text?: string;
@@ -13,26 +14,61 @@ interface ButtonProps {
 
 export enum ButtonType {
     Primary,
-    Secondary
+    Secondary,
+    Blank
 }
 
 const Button = ({ text, click, type, additionalClassName } : ButtonProps) => {
 
+    const [style, setStyle] = useState({});    
     const theme = useContext<ThemeType>(ThemeContext);
+
+    useEffect(() => {
+
+        const styleButton = (buttonType: ButtonType) => {
+            switch (buttonType) {
+                case ButtonType.Primary: {
+                    setStyle({ 
+                        backgroundColor: theme.primary,
+                        color: theme.primaryTextColor
+                    });
+                  break;
+                }
+                case ButtonType.Secondary: {
+                    setStyle({ 
+                        backgroundColor: theme.secondary,
+                        color: theme.secondaryTextColor
+                    });
+                  break;
+                }
+                case ButtonType.Blank: {
+                    setStyle({ 
+                        backgroundColor: theme.containerColor,
+                        color: theme.primary
+                    });
+                  break;
+                }
+                default: {
+                    setStyle({ 
+                        backgroundColor: theme.primary,
+                        color: theme.primaryTextColor
+                    });
+                }
+            }
+        }
+
+        styleButton(type);
+    }, [type, theme]);
+
     
     return (
         <div>
             <button
                 className={"button " + additionalClassName}
                 onClick={click}
-                style={{ 
-                    backgroundColor: type === ButtonType.Primary ? theme.primary : theme.secondary,
-                    color: type === ButtonType.Primary ? theme.primaryTextColor : theme.secondaryTextColor
-                }}
+                style={style}
             >
-            <b>
                 {text}
-            </b>
             </button>
         </div>
 

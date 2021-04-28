@@ -6,7 +6,6 @@ import { lightTheme, darkTheme, ThemeType } from '../styling/themes';
 import { getMoviesByKeywords } from '../services/omdb.service';
 import './App.scss';
 import Search from './Search';
-import Container from './Container';
 
 const App = () => {
 
@@ -34,7 +33,6 @@ const App = () => {
       default: {
         setEnabledTheme(lightTheme);
       }
-
     }
   }
 
@@ -54,19 +52,16 @@ const App = () => {
       <GlobalStyles />
       <Fragment>
         <div className="App">
-          <div className="content">
-
-            <header>
-              The Shoppies
+          <div className="headBar">
+            <header className="header" style={{color: enabledTheme.secondary}}>
+                The Shoppies
             </header>
-
+          </div>
+          <div className="content">
             <Search
               onSubmit={makeMovieSearchQuery}
-              defaultText="Avatar"
+              defaultText="Search for a movie!"
             ></Search>
-
-
-
             {moviesSearchResults && moviesSearchResults.map((entry: any) => {
               return <span key={entry.imdbID}>{entry.Title}</span>
             })}

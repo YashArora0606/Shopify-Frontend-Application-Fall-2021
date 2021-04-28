@@ -1,13 +1,17 @@
 .searchBar {
-  /* outline: 4px dashed yellow; */
+  // outline: 4px dashed yellow;
   display: inline-block;
-  width: 100%;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  text-indent: 1rem;
+  font-size: large;
 }
 
 .buttonArea {
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
-  width: 100%;
-  padding-top: 1rem;
-  /* outline: 2px dashed green; */
+  padding-left: 1rem;
+  padding-top: 0.2rem;
+  // outline: 2px dashed green;
 }

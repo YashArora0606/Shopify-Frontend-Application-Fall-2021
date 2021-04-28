@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button, { ButtonType } from './Button';
 import Container from './Container';
 import './Search.scss';
+import FadeIn from 'react-fade-in';
 
 interface SearchProps {
   onSubmit: (keywords: string) => Promise<void>;
@@ -12,18 +13,18 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
 
   const [keywords, setKeywords] = useState<string>("");
 
-  const submitButtonProps = {
+  var submitButtonProps = {
     click: () => {onSubmit(keywords)},
     text: "Submit",
     type: ButtonType.Primary,
-    additionalClassName: "submitButton" 
+    additionalClassName: "submitButton",
   }
 
-  const resetButtonProps = {
+  var resetButtonProps = {
     click: () => {setKeywords("")},
     text: "Reset",
-    type: ButtonType.Secondary,
-    additionalClassName: "resetButton" 
+    type: ButtonType.Blank,
+    additionalClassName: "resetButton",
   }
 
   const submitOnEnter = (event: { key: string; }) => {
@@ -32,22 +33,36 @@ const Search = ({ onSubmit, defaultText } : SearchProps) => {
     }
   }
 
+  const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newKeywords = e.target.value
+    setKeywords(newKeywords);
+  }
+
   return (
       <Container>
         <input className="searchBar"
         value={keywords}
         placeholder={defaultText}
-        onChange={(e) => setKeywords(e.target.value)}
+        onChange={(e) => {
+          handleKeywordChange(e)
+        }}
         onKeyDown={submitOnEnter}
         ></input>
-        <div className="buttonArea">
-          <Button
-            {...resetButtonProps}
-          />
-          <Button
-            {...submitButtonProps}
-          />
-        </div>
+        {keywords.length > 0 && 
+        
+        <FadeIn>
+          <div className="buttonArea">
+            <Button
+              {...resetButtonProps}
+            />
+            <Button
+              {...submitButtonProps}
+            />
+          </div>
+        </FadeIn>
+
+        
+        }
 
 
       </Container>
