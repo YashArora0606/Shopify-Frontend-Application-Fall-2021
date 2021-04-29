@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Nominations.scss';
-import { ThemeType } from '../styling/themes';
-import { ThemeContext } from 'styled-components';
 import Container from './Container';
 import Label from './Label';
 import { MovieModel } from '../models/movie.model';
@@ -14,18 +12,21 @@ type NominationsProps = {
 
 const Nominations = ({ nominationsList, onRemoveNomination } : NominationsProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
-
-    const style = {
-        color: theme.secondary
-    }
+    const [text, setText] = useState<string>("");
 
     useEffect(() => {
+        if (nominationsList.length === 0) {
+            setText("Nominate a movie to get started!")
+        } else {
+            setText("Your movie nominations:")
+        }
+
+
     }, [nominationsList]);
 
     return (
         <Container>
-            <p className="text" style={style}>{ "Your nominations will appear here!" }</p>
+            <p className="text">{ text }</p>
             <div className="entries">
                 {nominationsList.map((entry: any) => {
                     return (

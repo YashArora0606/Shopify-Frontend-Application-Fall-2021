@@ -15,7 +15,7 @@ const Container = ({ children } : ContainerProps) => {
     return (
         <div 
             className="container"
-            style={{ backgroundColor: theme.containerColor }}>
+            style={{ backgroundColor: theme.container }}>
             {children}
         </div>
 

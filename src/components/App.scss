@@ -2,12 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
   height: 100%;
   // outline: 2px solid green;
 }
 .content {
   max-width: 1080px;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +19,7 @@
 
 .headBar {
   max-width: 1080px;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   padding-top: 4rem;
   padding-left: 2rem;
@@ -27,17 +29,14 @@
   .header {
     font-size: xx-large;
     padding-bottom: 1rem;
-  
+
     // outline: 2px solid black;
-    // padding: 0 2em 0 2em;
   }
   .subtitle {
     // padding-left: 2rem;
     text-indent: 0.2rem;
   }
 }
-
-
 
 .twoColumnWrapper {
   display: flex;

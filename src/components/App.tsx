@@ -12,6 +12,8 @@ import { MovieModel } from '../models/movie.model';
 
 const App = () => {
 
+  const maxNominations = 5;
+
   const [enabledTheme, setEnabledTheme] = useState<ThemeType>(lightTheme);
   const [moviesSearchResults, setMoviesSearchResults] = useState<MovieModel[]>([]);
   const [moviesNominationsList, setMoviesNominationsList] = useState<MovieModel[]>([]);
@@ -25,26 +27,31 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log(moviesNominationsList)
   }, [moviesNominationsList]);
 
   const removeNomination = (movie: MovieModel) => {
-    // const newNominations = moviesNominationsList.filter((element: MovieModel) => {
-    //   return element.imdbID !== movie.imdbID;
-    // });
-    // setMoviesNominationsList(newNominations);
-  } 
+    setMoviesNominationsList(list => {
+      return list.filter((element) => {
+        return element.imdbID !== movie.imdbID
+      });
+    });
+  };
 
   const nominateMovie = (movie: MovieModel) => {
-    // Ensure movie cannot be nominated if already nominated
-    // This is to prevent users from bypassing the disabled button
-    
-    // if (moviesNominationsList.filter((element: MovieModel) => { return element.imdbID === movie.imdbID; }).length === 0) {
-    //   setMoviesNominationsList(list => [...list, movie]);
-    // }
-
-    setMoviesNominationsList(list => [...list, movie]);
-  }
+    setMoviesNominationsList(list => {
+      if (list.length >= maxNominations) {
+        console.log("can't add since list is full")
+      } else {
+        if (list.filter((entry) => { return entry.imdbID === movie.imdbID; }).length === 0) {
+          if (list.length === maxNominations - 1) {
+            console.log("list is now full")
+          }
+          return [...list, movie];
+        }
+      }
+      return list;
+    });
+  };
 
   const applyTheme = (theme: Theme) => {
 
@@ -68,7 +75,7 @@ const App = () => {
     const omdbReponse = await getMoviesByKeywords(keywords);
     console.log(omdbReponse);
     setMoviesSearchResults(omdbReponse);
-    // applyTheme(Theme.Dark);
+    applyTheme(Theme.Dark);
   }
 
   return (
@@ -76,9 +83,9 @@ const App = () => {
       <GlobalStyles />
       <Fragment>
         <div className="App">
-          <div className="headBar" style={{color: enabledTheme.secondary}}>
+          <div className="headBar">
             <header className="header">
-                Welcome to the <span style={{ color: enabledTheme.primary }}><b>Shoppies!</b></span>
+                Welcome to the <span style={{ color: enabledTheme.accent }}><b>Shoppies!</b></span>
             </header>
             <div className="subtitle">Nominate your <b>5 favourite movies</b> for this year's award show! </div>
           </div>
@@ -87,13 +94,13 @@ const App = () => {
 
             <div className="twoColumnWrapper">
                 <Results 
-                  nominationsList={[]}
+                  nominationsList={moviesNominationsList}
                   searchResults={moviesSearchResults} 
                   currentQuery={lastKeywords}
                   onNomination={nominateMovie}
                 />
                 <Nominations 
-                  nominationsList={[]}
+                  nominationsList={moviesNominationsList}
                   onRemoveNomination={removeNomination}
                 />
             </div>

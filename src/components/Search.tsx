@@ -22,6 +22,7 @@ const Search = ({ onSubmit } : SearchProps) => {
     text: "Go",
     type: ButtonType.Primary,
     additionalClassName: "submitButton",
+    disabled: false
   }
 
   var resetButtonProps = {
@@ -30,7 +31,8 @@ const Search = ({ onSubmit } : SearchProps) => {
     },
     type: ButtonType.Blank,
     additionalClassName: "resetButton",
-    icon: "times"
+    icon: "times",
+    disabled: false
   }
 
   const submitOnEnter = (event: { key: string; }) => {
@@ -50,13 +52,15 @@ const Search = ({ onSubmit } : SearchProps) => {
           className="searchIcon" 
           icon={faSearch} 
           size="2x"
-          color={theme.backgroundColor}
+          color={theme.background}
         />
-        <input className="searchBar"
+        <input 
+          className="searchBar"
+          style={{ background: theme.container, color: theme.text }}
           value={keywords}
           placeholder={"Search for a movie!"}
           onChange={(e) => {
-            handleKeywordChange(e)
+            handleKeywordChange(e);
           }}
           onKeyDown={submitOnEnter}
         />
@@ -68,11 +72,7 @@ const Search = ({ onSubmit } : SearchProps) => {
             <Button {...submitButtonProps} />
           </div>
         </FadeIn>
-
-        
         }
-
-
       </Container>
   );
 }

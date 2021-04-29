@@ -10,12 +10,13 @@ import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faTimes, faPlus)
 
-export interface ButtonProps {
+export type ButtonProps = {
     text?: string;
     click: () => any;
     type: ButtonType;
     additionalClassName?: string;
     icon?: string;
+    disabled: boolean;
 }
 
 export enum ButtonType {
@@ -24,7 +25,7 @@ export enum ButtonType {
     Blank
 }
 
-const Button = ({ text, click, type, additionalClassName, icon} : ButtonProps) => {
+const Button = ({ text, click, type, additionalClassName, icon, disabled} : ButtonProps) => {
 
     const [style, setStyle] = useState({});  
     const theme = useContext<ThemeType>(ThemeContext);
@@ -35,51 +36,50 @@ const Button = ({ text, click, type, additionalClassName, icon} : ButtonProps) =
             switch (buttonType) {
                 case ButtonType.Primary: {
                     setStyle({ 
-                        backgroundColor: theme.primary,
-                        color: theme.primaryTextColor
+                        backgroundColor: theme.accent,
+                        color: theme.container
                     });
                   break;
                 }
                 case ButtonType.Secondary: {
                     setStyle({ 
-                        backgroundColor: theme.secondary,
-                        color: theme.secondaryTextColor
+                        backgroundColor: theme.text,
+                        color: theme.container
                     });
                   break;
                 }
                 case ButtonType.Blank: {
                     setStyle({ 
-                        backgroundColor: theme.containerColor,
-                        color: theme.primary
+                        backgroundColor: theme.container,
+                        color: theme.accent
                     });
                   break;
                 }
                 default: {
                     setStyle({ 
-                        backgroundColor: theme.primary,
-                        color: theme.primaryTextColor
+                        backgroundColor: theme.accent,
+                        color: theme.container
                     });
                 }
             }
         }
 
-        // const styleAsDisabled = () => {
-        //     setStyle({
-        //         backgroundColor: theme.backgroundColor,
-        //         color: theme.primaryTextColor
-        //     });
-        // }
+        const styleAsDisabled = () => {
+            setStyle({
+                backgroundColor: theme.background,
+                color: theme.container,
+                pointerEvents: "none"
+            });
+        }
 
-        // setDisabled(buttonDisabled);
-        // console.log(buttonDisabled)
+        disabled ? styleAsDisabled() : styleButton(type);
 
-        styleButton(type);
-    }, [type, theme]);
+    }, [type, disabled, theme]);
 
     return (
         <div>
             <button
-                className={"button " + additionalClassName}
+                className={"button " + (additionalClassName ? (" " + additionalClassName) : "")}
                 onClick={click}
                 style={style}
             >

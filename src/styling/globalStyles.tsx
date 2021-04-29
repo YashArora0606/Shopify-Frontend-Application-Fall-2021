@@ -13,8 +13,8 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   }
 
   body {
-    background: ${({ theme }) => theme.backgroundColor};
-    color: ${({ theme }) => theme.primaryTextColor};
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text};
   }`;
 
   export default GlobalStyles;

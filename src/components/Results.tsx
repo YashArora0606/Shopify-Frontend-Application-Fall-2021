@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Results.scss';
 import Container from './Container';
 import Label from './Label';
-import { ThemeContext } from 'styled-components';
-import { ThemeType } from '../styling/themes';
 import { MovieModel } from '../models/movie.model';
 import { ButtonType } from './Button';
 
@@ -17,21 +15,15 @@ type ResultsProps = {
 
 const Results = ({ searchResults, nominationsList, currentQuery, onNomination } : ResultsProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
-
-    const [results, setResults] = useState<MovieModel[]>([]);
-    const [nominations, setNominations] = useState<MovieModel[]>([]);
-
     const [text, setText] = useState<string>("");
-    
-    const style = {
-        color: theme.secondary
+
+    const shouldButtonBeDisabled = (movie: MovieModel) => {
+        return nominationsList.filter((entry) => { 
+            return entry.imdbID === movie.imdbID; 
+        }).length !== 0;
     }
 
-    useEffect(() => {
-        setResults(searchResults);
-        setNominations(nominationsList);
-        
+    useEffect(() => {        
         if (currentQuery === "") {
             setText("Your search results will show up here!");
         } else if (!searchResults || searchResults.length === 0) {
@@ -44,13 +36,13 @@ const Results = ({ searchResults, nominationsList, currentQuery, onNomination } 
 
     return (
         <Container>
-            <p className="text" style={style}>{ text }</p>
+            <p className="text">{ text }</p>
             <div className="entries">
-                {results.map((entry: any) => {
+                {searchResults.map((entry: MovieModel) => {
                     return (
                         <Label
                             icon="plus"
-                            disableButton={nominations.includes(entry)}
+                            disableButton={shouldButtonBeDisabled(entry)}
                             buttonType={ButtonType.Primary}
                             click={() => {onNomination(entry)}}
                             key={entry.imdbID}

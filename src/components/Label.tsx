@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Label.scss';
-import { ThemeType } from '../styling/themes';
-import { ThemeContext } from 'styled-components';
 import Button, { ButtonProps, ButtonType } from './Button';
 
 type LabelProps = {
@@ -14,28 +12,22 @@ type LabelProps = {
 
 const Label = ({ data, icon, buttonType, click, disableButton }  : LabelProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
-
     const [buttonProps, setButtonProps] = useState<ButtonProps>({        
         click: click,
         type: buttonType,
-        icon: icon
-        
+        icon: icon,
+        disabled: false
     })
 
-    const style = {
-        color: theme.secondary,
-        // outline: "2px dashed red"
-    }
-
     useEffect(() => {
-        if (disableButton) {
-            console.log("label knows " + data.Title + " button should be disabled")
-        }
+        setButtonProps(props => ({
+            ...props,
+            disabled: disableButton
+        }));
     }, [disableButton]);
 
     return (
-        <div className="label" style={style}>
+        <div className="label">
             <Button { ...buttonProps } />
             <div className="cardText">{data.Title}</div>
         </div>
