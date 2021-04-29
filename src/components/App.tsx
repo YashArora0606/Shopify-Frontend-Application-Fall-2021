@@ -8,12 +8,13 @@ import './App.scss';
 import Search from './Search';
 import Results from './Results';
 import Nominations from './Nominations';
+import { MovieModel } from '../models/movie.model';
 
 const App = () => {
 
   const [enabledTheme, setEnabledTheme] = useState<ThemeType>(lightTheme);
-  const [moviesSearchResults, setMoviesSearchResults] = useState<any>([]);
-  const [moviesNominationsList, setMoviesNominationsList] = useState<any>([]);
+  const [moviesSearchResults, setMoviesSearchResults] = useState<MovieModel[]>([]);
+  const [moviesNominationsList, setMoviesNominationsList] = useState<MovieModel[]>([]);
   const [lastKeywords, setLastKeywords] = useState<string>("");
 
   enum Theme {
@@ -21,6 +22,14 @@ const App = () => {
     Dark,
     Rainbow,
     Shopify
+  }
+
+  const nominateMovie = (movie: MovieModel) => {
+    // Ensure movie cannot be nominated if already nominated
+    // This is to prevent users from bypassing the disabled button
+    if (moviesNominationsList.filter((element: MovieModel) => { return element.imdbID === movie.imdbID; }).length === 0) {
+      setMoviesNominationsList(moviesNominationsList => [...moviesNominationsList, movie])
+    }
   }
 
   const applyTheme = (theme: Theme) => {
@@ -48,7 +57,7 @@ const App = () => {
     const omdbReponse = await getMoviesByKeywords(keywords);
     console.log(omdbReponse);
     setMoviesSearchResults(omdbReponse);
-    applyTheme(Theme.Dark);
+    // applyTheme(Theme.Dark);
   }
 
   return (
@@ -64,9 +73,14 @@ const App = () => {
           </div>
           <div className="content">
             <Search onSubmit={makeMovieSearchQuery}/>
+            {/* {moviesNominationsList.length === 5 && <div>Fulll</div>} */}
 
             <div className="twoColumnWrapper">
-                <Results searchResults={moviesSearchResults} currentQuery={lastKeywords}/>
+                <Results 
+                  searchResults={moviesSearchResults} 
+                  currentQuery={lastKeywords}
+                  onNomination={nominateMovie}
+                />
                 <Nominations nominationsList={moviesNominationsList}/>
             </div>
 

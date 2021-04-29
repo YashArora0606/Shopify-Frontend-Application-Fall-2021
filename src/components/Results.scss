@@ -1,3 +1,12 @@
 .text {
+    width: 100%;
     font-weight: bold;
+    padding-left: 0.75rem;
+    padding-bottom: 0.3rem;
+    // outline: 1px dashed blue;
+}
+
+.entries {
+    padding-left: 1rem;
+    // outline: 2px dashed blue;
 }

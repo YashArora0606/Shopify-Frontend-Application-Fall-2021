@@ -1,16 +1,9 @@
 import axios from 'axios'
+import { MovieModel } from '../models/movie.model';
 
 // See http://www.omdbapi.com/ for API documentation
 const OMDB_URL = "http://www.omdbapi.com/";
 const OMDB_API_KEY = process.env.REACT_APP_OMDB_API_KEY;
-
-type MovieModel = {
-     Title: string;
-     Poster: string;
-     Type: string;
-     Year: string;
-     imdbID: string;
-};
 
 export const getMoviesByKeywords = async (keywords: string) => {
 
@@ -24,7 +17,7 @@ export const getMoviesByKeywords = async (keywords: string) => {
           }
    })
    .then((response) => {
-        
+
           const movies: [MovieModel] = response.data.Search;
           
           // Return empty list instead of undefined

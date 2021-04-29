@@ -6,9 +6,9 @@ import { ThemeType } from '../styling/themes';
 import { useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTimes)
+library.add(faTimes, faPlus)
 
 interface ButtonProps {
     text?: string;

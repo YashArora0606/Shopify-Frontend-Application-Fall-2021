@@ -9,6 +9,8 @@
   max-width: 1080px;
   width: 80%;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
   // outline: 2px solid blue;
 }
 
@@ -39,17 +41,17 @@
 .twoColumnWrapper {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   // outline: 2px dashed blue;
   .container {
-    width: 50%;
+    width: 45%;
   }
 }
 
 @media (max-width: 768px) {
-  .content {
-    width: 100%;
-  }
-  .headBar {
-    width: 100%;
+  .twoColumnWrapper {
+    .container {
+      width: 100%;
+    }
   }
 }

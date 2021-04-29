@@ -4,14 +4,16 @@ import Container from './Container';
 import ResultCard from './ResultCard';
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';
+import { MovieModel } from '../models/movie.model';
 
 // Todo: type search results
 type ResultsProps = {
     searchResults: any
     currentQuery: string
+    onNomination: (movie: MovieModel) => void
 }
 
-const Results = ({ searchResults, currentQuery } : ResultsProps) => {
+const Results = ({ searchResults, currentQuery, onNomination } : ResultsProps) => {
 
     const theme = useContext<ThemeType>(ThemeContext);
 
@@ -38,14 +40,18 @@ const Results = ({ searchResults, currentQuery } : ResultsProps) => {
     return (
         <Container>
             <p className="text" style={style}>{ text }</p>
-            {results.map((entry: any) => {
-                return (
-                    <ResultCard
-                        key={entry.imdbID}
-                        data={entry}
-                    />
-                );
-            })}
+            <div className="entries">
+                {results.map((entry: any) => {
+                    return (
+                        <ResultCard
+                            click={() => {onNomination(entry)}}
+                            key={entry.imdbID}
+                            data={entry}
+                        />
+                    );
+                })}
+            </div>
+
         </Container>
     );
 };
