@@ -1,14 +1,18 @@
-import React, { useContext } from 'react';
-import './ResultCard.scss';
+import React, { useContext, useEffect, useState } from 'react';
+import './Nominations.scss';
 import { ThemeType } from '../styling/themes';
 import { ThemeContext } from 'styled-components';
 import Container from './Container';
+import Label from './Label';
+import { MovieModel } from '../models/movie.model';
+import { ButtonType } from './Button';
 
 type NominationsProps = {
-    nominationsList: any
+    onRemoveNomination: (entry: MovieModel) => any;
+    nominationsList: MovieModel[];
 }
 
-const Nominations = ({ nominationsList } : NominationsProps) => {
+const Nominations = ({ nominationsList, onRemoveNomination } : NominationsProps) => {
 
     const theme = useContext<ThemeType>(ThemeContext);
 
@@ -16,14 +20,26 @@ const Nominations = ({ nominationsList } : NominationsProps) => {
         color: theme.secondary
     }
 
+    useEffect(() => {
+    }, [nominationsList]);
+
     return (
         <Container>
-            { nominationsList.length > 0 ? nominationsList.map((entry: any) => {
-                return (
-                    <div key={entry.imdbID} style={style}>{entry.Title}</div>
-                    // <Nomination></Nomination>
-                );
-            }) : <p style={style} className="text">Your nominations will appear here!</p> }
+            <p className="text" style={style}>{ "Your nominations will appear here!" }</p>
+            <div className="entries">
+                {nominationsList.map((entry: any) => {
+                    return (
+                        <Label
+                            icon="times"
+                            disableButton={false}
+                            buttonType={ButtonType.Secondary}
+                            click={() => {onRemoveNomination(entry)}}
+                            key={entry.imdbID}
+                            data={entry}
+                        />
+                    );
+                })}
+            </div>
         </Container>
     );
 };

@@ -1,23 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Results.scss';
 import Container from './Container';
-import ResultCard from './ResultCard';
+import Label from './Label';
 import { ThemeContext } from 'styled-components';
 import { ThemeType } from '../styling/themes';
 import { MovieModel } from '../models/movie.model';
+import { ButtonType } from './Button';
 
 // Todo: type search results
 type ResultsProps = {
-    searchResults: any
+    searchResults: MovieModel[]
     currentQuery: string
+    nominationsList: MovieModel[];
     onNomination: (movie: MovieModel) => void
 }
 
-const Results = ({ searchResults, currentQuery, onNomination } : ResultsProps) => {
+const Results = ({ searchResults, nominationsList, currentQuery, onNomination } : ResultsProps) => {
 
     const theme = useContext<ThemeType>(ThemeContext);
 
-    const [results, setResults] = useState<any>([]);
+    const [results, setResults] = useState<MovieModel[]>([]);
+    const [nominations, setNominations] = useState<MovieModel[]>([]);
+
     const [text, setText] = useState<string>("");
     
     const style = {
@@ -26,6 +30,7 @@ const Results = ({ searchResults, currentQuery, onNomination } : ResultsProps) =
 
     useEffect(() => {
         setResults(searchResults);
+        setNominations(nominationsList);
         
         if (currentQuery === "") {
             setText("Your search results will show up here!");
@@ -35,7 +40,7 @@ const Results = ({ searchResults, currentQuery, onNomination } : ResultsProps) =
             setText(`Showing results for "${currentQuery}"`);
         }
 
-    }, [searchResults, currentQuery]);
+    }, [searchResults, currentQuery, nominationsList]);
 
     return (
         <Container>
@@ -43,7 +48,10 @@ const Results = ({ searchResults, currentQuery, onNomination } : ResultsProps) =
             <div className="entries">
                 {results.map((entry: any) => {
                     return (
-                        <ResultCard
+                        <Label
+                            icon="plus"
+                            disableButton={nominations.includes(entry)}
+                            buttonType={ButtonType.Primary}
                             click={() => {onNomination(entry)}}
                             key={entry.imdbID}
                             data={entry}

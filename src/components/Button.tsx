@@ -10,7 +10,7 @@ import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faTimes, faPlus)
 
-interface ButtonProps {
+export interface ButtonProps {
     text?: string;
     click: () => any;
     type: ButtonType;
@@ -26,7 +26,7 @@ export enum ButtonType {
 
 const Button = ({ text, click, type, additionalClassName, icon} : ButtonProps) => {
 
-    const [style, setStyle] = useState({});    
+    const [style, setStyle] = useState({});  
     const theme = useContext<ThemeType>(ThemeContext);
 
     useEffect(() => {
@@ -63,10 +63,19 @@ const Button = ({ text, click, type, additionalClassName, icon} : ButtonProps) =
             }
         }
 
+        // const styleAsDisabled = () => {
+        //     setStyle({
+        //         backgroundColor: theme.backgroundColor,
+        //         color: theme.primaryTextColor
+        //     });
+        // }
+
+        // setDisabled(buttonDisabled);
+        // console.log(buttonDisabled)
+
         styleButton(type);
     }, [type, theme]);
 
-    
     return (
         <div>
             <button

@@ -24,12 +24,26 @@ const App = () => {
     Shopify
   }
 
+  useEffect(() => {
+    console.log(moviesNominationsList)
+  }, [moviesNominationsList]);
+
+  const removeNomination = (movie: MovieModel) => {
+    // const newNominations = moviesNominationsList.filter((element: MovieModel) => {
+    //   return element.imdbID !== movie.imdbID;
+    // });
+    // setMoviesNominationsList(newNominations);
+  } 
+
   const nominateMovie = (movie: MovieModel) => {
     // Ensure movie cannot be nominated if already nominated
     // This is to prevent users from bypassing the disabled button
-    if (moviesNominationsList.filter((element: MovieModel) => { return element.imdbID === movie.imdbID; }).length === 0) {
-      setMoviesNominationsList(moviesNominationsList => [...moviesNominationsList, movie])
-    }
+    
+    // if (moviesNominationsList.filter((element: MovieModel) => { return element.imdbID === movie.imdbID; }).length === 0) {
+    //   setMoviesNominationsList(list => [...list, movie]);
+    // }
+
+    setMoviesNominationsList(list => [...list, movie]);
   }
 
   const applyTheme = (theme: Theme) => {
@@ -48,9 +62,6 @@ const App = () => {
       }
     }
   }
-
-  useEffect(() => {
-  }, [])
 
   const makeMovieSearchQuery = async (keywords: string) => {
     setLastKeywords(keywords);
@@ -73,15 +84,18 @@ const App = () => {
           </div>
           <div className="content">
             <Search onSubmit={makeMovieSearchQuery}/>
-            {/* {moviesNominationsList.length === 5 && <div>Fulll</div>} */}
 
             <div className="twoColumnWrapper">
                 <Results 
+                  nominationsList={[]}
                   searchResults={moviesSearchResults} 
                   currentQuery={lastKeywords}
                   onNomination={nominateMovie}
                 />
-                <Nominations nominationsList={moviesNominationsList}/>
+                <Nominations 
+                  nominationsList={[]}
+                  onRemoveNomination={removeNomination}
+                />
             </div>
 
           </div>
