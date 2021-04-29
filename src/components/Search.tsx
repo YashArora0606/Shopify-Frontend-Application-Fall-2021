@@ -19,7 +19,7 @@ const Search = ({ onSubmit } : SearchProps) => {
 
   var submitButtonProps = {
     click: () => {onSubmit(keywords)},
-    text: "Submit",
+    text: "Go",
     type: ButtonType.Primary,
     additionalClassName: "submitButton",
   }

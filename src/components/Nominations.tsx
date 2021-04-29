@@ -23,7 +23,7 @@ const Nominations = ({ nominationsList } : NominationsProps) => {
                     <div key={entry.imdbID} style={style}>{entry.Title}</div>
                     // <Nomination></Nomination>
                 );
-            }) : <p style={style}>Your nominations will appear here!</p> }
+            }) : <p style={style} className="text">Your nominations will appear here!</p> }
         </Container>
     );
 };

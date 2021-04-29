@@ -25,10 +25,10 @@ const Results = ({ searchResults, currentQuery } : ResultsProps) => {
     useEffect(() => {
         setResults(searchResults);
         
-        if (!searchResults) {
-            setText(`Sorry, we couldn't find any search results for "${currentQuery}"`);
-        } else if (searchResults.length === 0) {
+        if (currentQuery === "") {
             setText("Your search results will show up here!");
+        } else if (!searchResults || searchResults.length === 0) {
+            setText(`Sorry, we couldn't find any search results for "${currentQuery}"`);
         } else {
             setText(`Showing results for "${currentQuery}"`);
         }
@@ -37,8 +37,8 @@ const Results = ({ searchResults, currentQuery } : ResultsProps) => {
 
     return (
         <Container>
-            <p style={style}>{ text }</p>
-            {results && results.map((entry: any) => {
+            <p className="text" style={style}>{ text }</p>
+            {results.map((entry: any) => {
                 return (
                     <ResultCard
                         key={entry.imdbID}

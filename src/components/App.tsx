@@ -45,10 +45,9 @@ const App = () => {
 
   const makeMovieSearchQuery = async (keywords: string) => {
     setLastKeywords(keywords);
-    console.log("setting keywords to, " + keywords)
     const omdbReponse = await getMoviesByKeywords(keywords);
-    console.log(omdbReponse.data.Search)
-    setMoviesSearchResults(omdbReponse.data.Search);
+    console.log(omdbReponse);
+    setMoviesSearchResults(omdbReponse);
     applyTheme(Theme.Dark);
   }
 
@@ -57,10 +56,11 @@ const App = () => {
       <GlobalStyles />
       <Fragment>
         <div className="App">
-          <div className="headBar">
-            <header className="header" style={{color: enabledTheme.secondary}}>
-                The Shoppies
+          <div className="headBar" style={{color: enabledTheme.secondary}}>
+            <header className="header">
+                Welcome to the <span style={{ color: enabledTheme.primary }}><b>Shoppies!</b></span>
             </header>
+            <div className="subtitle">Nominate your <b>5 favourite movies</b> for this year's award show! </div>
           </div>
           <div className="content">
             <Search onSubmit={makeMovieSearchQuery}/>

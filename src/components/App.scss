@@ -13,22 +13,28 @@
 }
 
 .headBar {
-  width: 100%;
-  // outline: 2px solid red;
-}
-
-.header {
-  font-size: xx-large;
   max-width: 1080px;
   width: 80%;
   margin: 0 auto;
   padding-top: 4rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-bottom: 2rem;
-  // outline: 2px solid black;
-  // padding: 0 2em 0 2em;
+  padding-bottom: 1rem;
+  // outline: 2px solid red;
+  .header {
+    font-size: xx-large;
+    padding-bottom: 1rem;
+  
+    // outline: 2px solid black;
+    // padding: 0 2em 0 2em;
+  }
+  .subtitle {
+    // padding-left: 2rem;
+    text-indent: 0.2rem;
+  }
 }
+
+
 
 .twoColumnWrapper {
   display: flex;
@@ -43,7 +49,7 @@
   .content {
     width: 100%;
   }
-  .header {
+  .headBar {
     width: 100%;
   }
 }

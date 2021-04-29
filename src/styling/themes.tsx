@@ -2,7 +2,7 @@ const lightTheme = {
     backgroundColor: "#e6e6e6",
     primaryTextColor: "#ffffff",
     secondaryTextColor: "#ffffff",
-    primary: "#2abf2d",
+    primary: "#4fbd7c",
     secondary: "#000000",
     containerColor: "#ffffff"
 }
