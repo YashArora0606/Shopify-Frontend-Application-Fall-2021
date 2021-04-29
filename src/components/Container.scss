@@ -1,13 +1,15 @@
 .container {
   display: flex;
-  flex-direction: ul;
+  flex-direction: row;
   flex-wrap: wrap;
+  flex-grow: 1;
   margin: 1rem 1rem;
   padding: 1rem;
-  /* border: solid 1px grey; */
+  // border: dashed 3px red;
   border-radius: 1rem;
   height: min-content;
   transition: all 0.2s;
+  overflow: hidden;
 }
 
 .container:hover {

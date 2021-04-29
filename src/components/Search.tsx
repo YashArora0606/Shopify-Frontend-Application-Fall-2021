@@ -25,8 +25,9 @@ const Search = ({ onSubmit } : SearchProps) => {
   }
 
   var resetButtonProps = {
-    click: () => {setKeywords("")},
-    // text: "X",
+    click: () => {
+      setKeywords("");
+    },
     type: ButtonType.Blank,
     additionalClassName: "resetButton",
     icon: "times"

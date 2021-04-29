@@ -6,11 +6,15 @@ import { lightTheme, darkTheme, ThemeType } from '../styling/themes';
 import { getMoviesByKeywords } from '../services/omdb.service';
 import './App.scss';
 import Search from './Search';
+import Results from './Results';
+import Nominations from './Nominations';
 
 const App = () => {
 
   const [enabledTheme, setEnabledTheme] = useState<ThemeType>(lightTheme);
   const [moviesSearchResults, setMoviesSearchResults] = useState<any>([]);
+  const [moviesNominationsList, setMoviesNominationsList] = useState<any>([]);
+  const [lastKeywords, setLastKeywords] = useState<string>("");
 
   enum Theme {
     Light,
@@ -37,13 +41,14 @@ const App = () => {
   }
 
   useEffect(() => {
-
   }, [])
 
   const makeMovieSearchQuery = async (keywords: string) => {
+    setLastKeywords(keywords);
+    console.log("setting keywords to, " + keywords)
     const omdbReponse = await getMoviesByKeywords(keywords);
+    console.log(omdbReponse.data.Search)
     setMoviesSearchResults(omdbReponse.data.Search);
-    console.log(omdbReponse);
     applyTheme(Theme.Dark);
   }
 
@@ -58,12 +63,13 @@ const App = () => {
             </header>
           </div>
           <div className="content">
-            <Search
-              onSubmit={makeMovieSearchQuery}
-            ></Search>
-            {moviesSearchResults && moviesSearchResults.map((entry: any) => {
-              return <span key={entry.imdbID}>{entry.Title}</span>
-            })}
+            <Search onSubmit={makeMovieSearchQuery}/>
+
+            <div className="twoColumnWrapper">
+                <Results searchResults={moviesSearchResults} currentQuery={lastKeywords}/>
+                <Nominations nominationsList={moviesNominationsList}/>
+            </div>
+
           </div>
         </div>
       </Fragment>
