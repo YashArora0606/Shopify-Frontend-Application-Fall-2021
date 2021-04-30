@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
-import { ThemeType } from '../styling/themes';
+import { ThemeModel } from '../models/theme.model';
 import "./Banner.scss"
 import Container from './Container';
 
@@ -10,7 +10,7 @@ type BannerProps = {
 
 const Banner = ({ text } : BannerProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
+    const theme = useContext<ThemeModel>(ThemeContext);
 
     return (
         <Container background={theme.accent}>

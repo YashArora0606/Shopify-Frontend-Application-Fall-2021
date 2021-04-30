@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import './Button.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from 'styled-components';
-import { ThemeType } from '../styling/themes';
+import { ThemeModel } from '../models/theme.model';
 import { useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -27,7 +27,7 @@ export enum ButtonType {
 const Button = ({ text, click, type, icon, disabled} : ButtonProps) => {
 
     const [style, setStyle] = useState({});  
-    const theme = useContext<ThemeType>(ThemeContext);
+    const theme = useContext<ThemeModel>(ThemeContext);
 
     useEffect(() => {
 

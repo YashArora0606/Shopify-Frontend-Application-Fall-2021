@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './Label.scss';
 import Button, { ButtonProps, ButtonType } from './Button';
 import { MovieModel } from '../models/movie.model';
-import { ThemeType } from '../styling/themes';
+import { ThemeModel } from '../models/theme.model';
 import { ThemeContext } from 'styled-components';
 
 type LabelProps = {
@@ -15,7 +15,7 @@ type LabelProps = {
 
 const Label = ({ data, icon, buttonType, click, disableButton }  : LabelProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
+    const theme = useContext<ThemeModel>(ThemeContext);
 
     const [buttonProps, setButtonProps] = useState<ButtonProps>({        
         click: click,
@@ -38,7 +38,7 @@ const Label = ({ data, icon, buttonType, click, disableButton }  : LabelProps) =
                 <div className="labelTitle">
                     {data.Title}
                 </div>
-                <div className="labelYear" style={ {color: theme.accent} }>
+                <div className="labelData" style={ {color: theme.accent} }>
                     {`${data.Year}`}
                 </div>
             </span>

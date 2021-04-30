@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import GlobalStyles from '../styling/globalStyles';
 import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme, ThemeType } from '../styling/themes';
+import { availableThemes } from '../styling/themes';
 
 import { getMoviesByKeywords } from '../services/omdb.service';
 import './App.scss';
@@ -10,23 +10,20 @@ import Results from './Results';
 import Nominations from './Nominations';
 import { MovieModel } from '../models/movie.model';
 import Banner from './Banner';
+import { Dropdown } from 'react-bootstrap';
+import { ThemeModel } from '../models/theme.model';
 
 const App = () => {
 
   const maxNominations = 5;
 
-  const [enabledTheme, setEnabledTheme] = useState<ThemeType>(lightTheme);
+  const [enabledTheme, setEnabledTheme] = useState<ThemeModel>(availableThemes[0]);
   const [moviesSearchResults, setMoviesSearchResults] = useState<MovieModel[]>([]);
   const [moviesNominationsList, setMoviesNominationsList] = useState<MovieModel[]>([]);
   const [lastKeywords, setLastKeywords] = useState<string>("");
   const [showBanner, setShowBanner] = useState<boolean>(false);
 
-  enum Theme {
-    Light,
-    Dark,
-    Rainbow,
-    Shopify
-  }
+  // const availableThemes: ThemeModel[] = [lightTheme, darkTheme];
 
   useEffect(() => {
     setShowBanner(moviesNominationsList.length === maxNominations);
@@ -54,29 +51,11 @@ const App = () => {
     });
   };
 
-  const applyTheme = (theme: Theme) => {
-
-    switch (theme) {
-      case Theme.Light: {
-        setEnabledTheme(lightTheme);
-        break;
-      }
-      case Theme.Dark: {
-        setEnabledTheme(darkTheme);
-        break;
-      }
-      default: {
-        setEnabledTheme(lightTheme);
-      }
-    }
-  }
-
   const makeMovieSearchQuery = async (keywords: string) => {
     setLastKeywords(keywords);
     const omdbReponse = await getMoviesByKeywords(keywords);
     console.log(omdbReponse);
     setMoviesSearchResults(omdbReponse);
-    // applyTheme(Theme.Dark);
   }
 
   return (
@@ -85,6 +64,20 @@ const App = () => {
       <Fragment>
         <div className="App">
           <div className="headBar">
+            <Dropdown>
+              <Dropdown.Toggle className="themeSelector" style={{ backgroundColor: enabledTheme.accent, color: enabledTheme.container}}/>
+              <Dropdown.Menu className="themeSelectorMenu" style={{ backgroundColor: enabledTheme.container}}>
+                {availableThemes.map((theme) => {
+                  return (
+                    <Dropdown.Item key={theme.title} as="button" className="themeSelectorMenuItem" style={{ color: enabledTheme.text }}>
+                      <div onClick={() => {setEnabledTheme(theme)}}>
+                        {theme.title}
+                      </div>                  
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
             <header className="header">
                 Welcome to the <span style={{ color: enabledTheme.accent }}><b>Shoppies!</b></span>
             </header>

@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
-import { ThemeType } from './themes';
+import { ThemeModel } from '../models/theme.model';
 
 // Fonts from Shopify design philosophy
 
-const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
+const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
   *,
   *::after,
   *::before {
@@ -15,6 +15,15 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   body {
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
-  }`;
+  }
+  
+  .text {
+    width: 100%;
+    font-weight: bold;
+    padding: 0.75rem;
+    margin: 0;
+  }
+
+  `;
 
   export default GlobalStyles;

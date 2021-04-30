@@ -2,7 +2,7 @@ import React, { ReactFragment, useContext } from 'react';
 import './Container.scss';
 
 import { ThemeContext } from 'styled-components';
-import { ThemeType } from '../styling/themes';
+import { ThemeModel } from '../models/theme.model';
 
 type ContainerProps = {
     children?: ReactFragment
@@ -11,11 +11,11 @@ type ContainerProps = {
 
 const Container = ({ children, background } : ContainerProps) => {
 
-    const theme = useContext<ThemeType>(ThemeContext);
+    const theme = useContext<ThemeModel>(ThemeContext);
 
     return (
         <div 
-            className="container"
+            className="customContainer"
             style={{ backgroundColor: background ? background : theme.container, 
                      color: background ? theme.container : theme.text}}>
             {children}

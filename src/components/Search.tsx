@@ -5,7 +5,7 @@ import './Search.scss';
 import FadeIn from 'react-fade-in';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { ThemeType } from '../styling/themes';
+import { ThemeModel } from '../models/theme.model';
 import { ThemeContext } from 'styled-components';
 
 interface SearchProps {
@@ -14,7 +14,7 @@ interface SearchProps {
 
 const Search = ({ onSubmit } : SearchProps) => {
 
-  const theme = useContext<ThemeType>(ThemeContext);
+  const theme = useContext<ThemeModel>(ThemeContext);
   const [keywords, setKeywords] = useState<string>("");
 
   var submitButtonProps = {
