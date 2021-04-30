@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from 'react';
-import './Button.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ThemeContext } from 'styled-components';
-import { ThemeModel } from '../../models/theme.model';
-import { useState } from 'react';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import React, { useContext, useEffect } from "react";
+import "./Button.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ThemeContext } from "styled-components";
+import { ThemeModel } from "../../models/theme.model";
+import { useState } from "react";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faTimes, faPlus)
+library.add(faTimes, faPlus, faMinus);
 
 export type ButtonProps = {
     text?: string;
@@ -16,63 +16,60 @@ export type ButtonProps = {
     type: ButtonType;
     icon?: string;
     disabled: boolean;
-}
+};
 
 export enum ButtonType {
     Primary,
     Secondary,
-    Blank
+    Blank,
 }
 
-const Button = ({ text, click, type, icon, disabled} : ButtonProps) => {
-
-    const [style, setStyle] = useState({});  
+const Button = ({ text, click, type, icon, disabled }: ButtonProps) => {
+    const [style, setStyle] = useState({});
     const theme = useContext<ThemeModel>(ThemeContext);
 
     useEffect(() => {
-
         const styleButton = (buttonType: ButtonType) => {
             switch (buttonType) {
                 case ButtonType.Primary: {
-                    setStyle({ 
+                    setStyle({
                         backgroundColor: theme.accent,
-                        color: theme.container
+                        color: theme.container,
                     });
-                  break;
+                    break;
                 }
                 case ButtonType.Secondary: {
-                    setStyle({ 
+                    setStyle({
                         backgroundColor: theme.text,
-                        color: theme.container
+                        color: theme.container,
                     });
-                  break;
+                    break;
                 }
                 case ButtonType.Blank: {
-                    setStyle({ 
+                    setStyle({
                         backgroundColor: theme.container,
-                        color: theme.accent
+                        color: theme.accent,
                     });
-                  break;
+                    break;
                 }
                 default: {
-                    setStyle({ 
+                    setStyle({
                         backgroundColor: theme.accent,
-                        color: theme.container
+                        color: theme.container,
                     });
                 }
             }
-        }
+        };
 
         const styleAsDisabled = () => {
             setStyle({
                 backgroundColor: theme.background,
                 color: theme.container,
-                pointerEvents: "none"
+                pointerEvents: "none",
             });
-        }
+        };
 
         disabled ? styleAsDisabled() : styleButton(type);
-
     }, [type, disabled, theme]);
 
     return (
@@ -87,7 +84,6 @@ const Button = ({ text, click, type, icon, disabled} : ButtonProps) => {
                 {text}
             </button>
         </div>
-
     );
 };
 

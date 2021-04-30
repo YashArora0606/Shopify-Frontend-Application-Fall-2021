@@ -1,4 +1,4 @@
-import { ThemeModel } from "../models/theme.model";
+import { ThemeModel } from "./models/theme.model";
 
 export const availableThemes: ThemeModel[] = [
     {
@@ -7,21 +7,21 @@ export const availableThemes: ThemeModel[] = [
         text: "#36393E",
         container: "#ffffff",
         accent: "#4fbd7c",
-    }, 
+    },
     {
         title: "Dark Theme",
         background: "#1E2124",
         text: "#ffffff",
         container: "#36393E",
         accent: "#4fbd7c",
-    }, 
+    },
     {
         title: "Atmosphere",
         background: "#a0c3fa",
         text: "#36393E",
         container: "#e6e6e6",
         accent: "#436eb0",
-    }, 
+    },
     {
         title: "Valiant",
         background: "#0F1923",
@@ -35,5 +35,12 @@ export const availableThemes: ThemeModel[] = [
         text: "#ffffff",
         container: "#312f36",
         accent: "#CCA837",
+    },
+    {
+        title: "Newspaper",
+        background: "#919191",
+        text: "#36393E",
+        container: "#c9c7c7",
+        accent: "#292929",
     },
 ];

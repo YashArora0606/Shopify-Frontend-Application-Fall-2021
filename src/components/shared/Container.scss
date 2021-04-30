@@ -1,16 +1,15 @@
 .custom-container {
-  display: inline-flex;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  margin: 1rem 1rem;
-  padding: 1rem;
-  // border: dashed 3px red;
-  border-radius: 1rem;
-  height: min-content;
-  transition: all 0.2s;
-  overflow: hidden;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    margin: 1rem 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    height: min-content;
+    transition: all 0.2s;
+    overflow: hidden;
 }
 
 .custom-container:hover {
-  box-shadow: 0 0 30px rgba(33, 33, 33, 0.2);
+    box-shadow: 0 0 30px rgba(33, 33, 33, 0.2);
 }

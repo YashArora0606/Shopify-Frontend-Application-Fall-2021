@@ -1,58 +1,58 @@
 .App {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 1080px;
-  margin: 0 auto;
-  height: 100%;
-  // outline: 2px solid green;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    height: 100%;
+    // outline: 2px solid green;
 }
 .content {
-  max-width: 1080px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .head-bar {
-  max-width: 1080px;
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-
-  .header {
-    font-size: xx-large;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     padding-bottom: 1rem;
-  }
+    display: flex;
+    flex-direction: column;
 
-  .subtitle {
-    text-indent: 0.2rem;
-  }
+    .header {
+        font-size: xx-large;
+        padding-bottom: 1rem;
+    }
+
+    .subtitle {
+        text-indent: 0.2rem;
+    }
 }
 
 .two-column-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
 
-  .custom-container {
-    width: 45%;
-  }
+    .custom-container {
+        width: 45%;
+    }
 }
 
 @media (max-width: 768px) {
-  .two-column-wrapper {
-    .custom-container {
-      width: 80%;
+    .two-column-wrapper {
+        .custom-container {
+            width: 80%;
+        }
     }
-  }
 }

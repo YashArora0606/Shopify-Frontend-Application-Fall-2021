@@ -1,28 +1,23 @@
 .search-bar {
-  display: inline-block;
-  flex-grow: 1;
-  width: 0%;
-  border: none;
-  overflow: hidden;
-  outline: none;
-  margin-left: 0.5rem;
-  font-size: large;
-  text-indent: 0.5rem;
-  // outline: 2px dashed blue;
+    display: inline-block;
+    flex-grow: 1;
+    width: 0%;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    margin-left: 0.5rem;
+    font-size: large;
+    text-indent: 0.5rem;
 }
 
 .button-area {
-  display: inline-flex;
-  justify-content: flex-end;
-  padding-top: 0.45rem;
-  // outline: 2px dashed green;
-  padding-left: 1rem;
-  // padding-bottom: 0.2rem;
+    display: inline-flex;
+    justify-content: flex-end;
+    padding-top: 0.45rem;
+    padding-left: 1rem;
 }
 
 .search-icon {
-  // color: lightgray;
-  // outline: 1px dashed red;
-  margin: 10px;
-  display: inline-block;
+    margin: 10px;
+    display: inline-block;
 }

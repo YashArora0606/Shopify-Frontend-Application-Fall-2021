@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { ThemeModel } from '../models/theme.model';
+import { createGlobalStyle } from "styled-components";
+import { ThemeModel } from "./models/theme.model";
 
 // Fonts from Shopify design philosophy
 
@@ -30,4 +30,4 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
 
   `;
 
-  export default GlobalStyles;
+export default GlobalStyles;
