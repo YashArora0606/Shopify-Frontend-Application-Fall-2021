@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import GlobalStyles from '../styling/globalStyles';
 import { ThemeProvider } from 'styled-components';
 import { availableThemes } from '../styling/themes';
-
 import { getMoviesByKeywords } from '../services/omdb.service';
 import './App.scss';
 import Search from './Search';
@@ -10,12 +9,12 @@ import Results from './Results';
 import Nominations from './Nominations';
 import { MovieModel } from '../models/movie.model';
 import Banner from './Banner';
-import { Dropdown } from 'react-bootstrap';
 import { ThemeModel } from '../models/theme.model';
+import ThemeSelector from './ThemeSelector';
 
 const App = () => {
 
-  const maxNominations = 5;
+  const NOMINATION_LIMIT = 5;
 
   const [enabledTheme, setEnabledTheme] = useState<ThemeModel>(availableThemes[0]);
   const [moviesSearchResults, setMoviesSearchResults] = useState<MovieModel[]>([]);
@@ -23,10 +22,8 @@ const App = () => {
   const [lastKeywords, setLastKeywords] = useState<string>("");
   const [showBanner, setShowBanner] = useState<boolean>(false);
 
-  // const availableThemes: ThemeModel[] = [lightTheme, darkTheme];
-
   useEffect(() => {
-    setShowBanner(moviesNominationsList.length === maxNominations);
+    setShowBanner(moviesNominationsList.length === NOMINATION_LIMIT);
   }, [moviesNominationsList]);
 
   const removeNomination = (movie: MovieModel) => {
@@ -39,12 +36,9 @@ const App = () => {
 
   const nominateMovie = (movie: MovieModel) => {
     setMoviesNominationsList(list => {
-      if (list.length >= maxNominations) {
+      if (list.length >= NOMINATION_LIMIT) {
         console.log("can't add since list is full")
       } else if (list.filter((entry) => { return entry.imdbID === movie.imdbID; }).length === 0) {
-        if (list.length === maxNominations - 1) {
-          console.log("list is now full")
-        }
         return [...list, movie];
       }
       return list;
@@ -63,21 +57,8 @@ const App = () => {
       <GlobalStyles />
       <Fragment>
         <div className="App">
-          <div className="headBar">
-            <Dropdown>
-              <Dropdown.Toggle className="themeSelector" style={{ backgroundColor: enabledTheme.accent, color: enabledTheme.container}}/>
-              <Dropdown.Menu className="themeSelectorMenu" style={{ backgroundColor: enabledTheme.container}}>
-                {availableThemes.map((theme) => {
-                  return (
-                    <Dropdown.Item key={theme.title} as="button" className="themeSelectorMenuItem" style={{ color: enabledTheme.text }}>
-                      <div onClick={() => {setEnabledTheme(theme)}}>
-                        {theme.title}
-                      </div>                  
-                    </Dropdown.Item>
-                  );
-                })}
-              </Dropdown.Menu>
-            </Dropdown>
+          <div className="head-bar">
+            <ThemeSelector onThemeSelection={(selectedTheme) => {setEnabledTheme(selectedTheme)}}/>
             <header className="header">
                 Welcome to the <span style={{ color: enabledTheme.accent }}><b>Shoppies!</b></span>
             </header>
@@ -86,8 +67,7 @@ const App = () => {
           <div className="content">
             <Search onSubmit={makeMovieSearchQuery}/>
             {showBanner && <Banner text="You've reached the maximum number of movie nominations."/>}
-
-            <div className="twoColumnWrapper">
+            <div className="two-column-wrapper">
                 <Results 
                   nominationsList={moviesNominationsList}
                   searchResults={moviesSearchResults} 
@@ -99,7 +79,6 @@ const App = () => {
                   onRemoveNomination={removeNomination}
                 />
             </div>
-
           </div>
         </div>
       </Fragment>

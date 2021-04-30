@@ -1,22 +1,17 @@
 .label {
-  // width: 100%;
   display: flex;
   padding: 0.3rem;
-  // outline: 1px dashed blue;
-  // outline: 2px dashed red;
 }
 
-.labelTitle {
+.label-title {
   padding-left: 1rem;
   padding-bottom: 0.1rem;
   font-size: large;
-  // outline: 1px solid black;
-
   display: flex;
   align-items: center;
 }
 
-.labelData {
+.label-data {
   display: flex;
   align-items: center;
   font-weight: bold;

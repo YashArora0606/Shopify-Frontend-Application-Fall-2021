@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Label.scss';
 import Button, { ButtonProps, ButtonType } from './Button';
-import { MovieModel } from '../models/movie.model';
-import { ThemeModel } from '../models/theme.model';
+import { MovieModel } from '../../models/movie.model';
+import { ThemeModel } from '../../models/theme.model';
 import { ThemeContext } from 'styled-components';
 
 type LabelProps = {
@@ -35,10 +35,10 @@ const Label = ({ data, icon, buttonType, click, disableButton }  : LabelProps) =
         <div className="label">
             <Button { ...buttonProps } />
             <span>
-                <div className="labelTitle">
+                <div className="label-title">
                     {data.Title}
                 </div>
-                <div className="labelData" style={ {color: theme.accent} }>
+                <div className="label-data" style={ {color: theme.accent} }>
                     {`${data.Year}`}
                 </div>
             </span>

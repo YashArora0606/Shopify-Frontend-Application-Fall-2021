@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import './Button.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeContext } from 'styled-components';
-import { ThemeModel } from '../models/theme.model';
+import { ThemeModel } from '../../models/theme.model';
 import { useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { library } from "@fortawesome/fontawesome-svg-core";

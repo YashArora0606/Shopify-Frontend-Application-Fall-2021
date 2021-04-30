@@ -23,6 +23,10 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
     padding: 0.75rem;
     margin: 0;
   }
+  
+  .entries {
+    padding-left: 1rem;
+  }
 
   `;
 

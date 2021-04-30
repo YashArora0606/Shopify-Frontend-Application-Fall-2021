@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Nominations.scss';
-import Container from './Container';
-import Label from './Label';
+import Container from './shared/Container';
+import Label from './shared/Label';
 import { MovieModel } from '../models/movie.model';
-import { ButtonType } from './Button';
+import { ButtonType } from './shared/Button';
 
 type NominationsProps = {
     onRemoveNomination: (entry: MovieModel) => any;
@@ -20,8 +20,6 @@ const Nominations = ({ nominationsList, onRemoveNomination } : NominationsProps)
         } else {
             setText("Your movie nominations:")
         }
-
-
     }, [nominationsList]);
 
     return (

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Results.scss';
-import Container from './Container';
-import Label from './Label';
+import Container from './shared/Container';
+import Label from './shared/Label';
 import { MovieModel } from '../models/movie.model';
-import { ButtonType } from './Button';
+import { ButtonType } from './shared/Button';
 
-// Todo: type search results
 type ResultsProps = {
-    searchResults: MovieModel[]
-    currentQuery: string
+    searchResults: MovieModel[];
+    currentQuery: string;
     nominationsList: MovieModel[];
-    onNomination: (movie: MovieModel) => void
+    onNomination: (movie: MovieModel) => void;
 }
 
 const Results = ({ searchResults, nominationsList, currentQuery, onNomination } : ResultsProps) => {
@@ -31,7 +30,6 @@ const Results = ({ searchResults, nominationsList, currentQuery, onNomination } 
         } else {
             setText(`Showing results for "${currentQuery}"`);
         }
-
     }, [searchResults, currentQuery, nominationsList]);
 
     return (

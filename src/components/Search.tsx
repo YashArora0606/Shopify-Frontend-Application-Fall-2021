@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import Button, { ButtonType } from './Button';
-import Container from './Container';
+import Button, { ButtonType } from './shared/Button';
+import Container from './shared/Container';
 import './Search.scss';
 import FadeIn from 'react-fade-in';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { ThemeModel } from '../models/theme.model';
 import { ThemeContext } from 'styled-components';
 
-interface SearchProps {
+type SearchProps = {
   onSubmit: (keywords: string) => Promise<void>;
 }
 
@@ -21,16 +21,12 @@ const Search = ({ onSubmit } : SearchProps) => {
     click: () => {onSubmit(keywords)},
     text: "Go",
     type: ButtonType.Primary,
-    additionalClassName: "submitButton",
     disabled: false
   }
 
   var resetButtonProps = {
-    click: () => {
-      setKeywords("");
-    },
+    click: () => { setKeywords("")},
     type: ButtonType.Blank,
-    additionalClassName: "resetButton",
     icon: "times",
     disabled: false
   }
@@ -49,13 +45,13 @@ const Search = ({ onSubmit } : SearchProps) => {
   return (
       <Container>
         <FontAwesomeIcon 
-          className="searchIcon" 
+          className="search-icon" 
           icon={faSearch} 
           size="2x"
           color={theme.background}
         />
         <input 
-          className="searchBar"
+          className="search-bar"
           style={{ background: theme.container, color: theme.text }}
           value={keywords}
           placeholder={"Search for a movie!"}
@@ -67,7 +63,7 @@ const Search = ({ onSubmit } : SearchProps) => {
         {keywords.length > 0 && 
         
         <FadeIn>
-          <div className="buttonArea">
+          <div className="button-area">
             <Button {...resetButtonProps} />
             <Button {...submitButtonProps} />
           </div>
