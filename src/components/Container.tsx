@@ -6,16 +6,18 @@ import { ThemeType } from '../styling/themes';
 
 type ContainerProps = {
     children?: ReactFragment
+    background?: string
 }
 
-const Container = ({ children } : ContainerProps) => {
+const Container = ({ children, background } : ContainerProps) => {
 
     const theme = useContext<ThemeType>(ThemeContext);
 
     return (
         <div 
             className="container"
-            style={{ backgroundColor: theme.container }}>
+            style={{ backgroundColor: background ? background : theme.container, 
+                     color: background ? theme.container : theme.text}}>
             {children}
         </div>
 

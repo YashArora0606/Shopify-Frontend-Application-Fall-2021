@@ -9,6 +9,7 @@ import Search from './Search';
 import Results from './Results';
 import Nominations from './Nominations';
 import { MovieModel } from '../models/movie.model';
+import Banner from './Banner';
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
   const [moviesSearchResults, setMoviesSearchResults] = useState<MovieModel[]>([]);
   const [moviesNominationsList, setMoviesNominationsList] = useState<MovieModel[]>([]);
   const [lastKeywords, setLastKeywords] = useState<string>("");
+  const [showBanner, setShowBanner] = useState<boolean>(false);
 
   enum Theme {
     Light,
@@ -27,6 +29,7 @@ const App = () => {
   }
 
   useEffect(() => {
+    setShowBanner(moviesNominationsList.length === maxNominations);
   }, [moviesNominationsList]);
 
   const removeNomination = (movie: MovieModel) => {
@@ -41,13 +44,11 @@ const App = () => {
     setMoviesNominationsList(list => {
       if (list.length >= maxNominations) {
         console.log("can't add since list is full")
-      } else {
-        if (list.filter((entry) => { return entry.imdbID === movie.imdbID; }).length === 0) {
-          if (list.length === maxNominations - 1) {
-            console.log("list is now full")
-          }
-          return [...list, movie];
+      } else if (list.filter((entry) => { return entry.imdbID === movie.imdbID; }).length === 0) {
+        if (list.length === maxNominations - 1) {
+          console.log("list is now full")
         }
+        return [...list, movie];
       }
       return list;
     });
@@ -75,7 +76,7 @@ const App = () => {
     const omdbReponse = await getMoviesByKeywords(keywords);
     console.log(omdbReponse);
     setMoviesSearchResults(omdbReponse);
-    applyTheme(Theme.Dark);
+    // applyTheme(Theme.Dark);
   }
 
   return (
@@ -91,6 +92,7 @@ const App = () => {
           </div>
           <div className="content">
             <Search onSubmit={makeMovieSearchQuery}/>
+            {showBanner && <Banner text="You've reached the maximum number of movie nominations."/>}
 
             <div className="twoColumnWrapper">
                 <Results 

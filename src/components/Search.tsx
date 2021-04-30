@@ -42,7 +42,7 @@ const Search = ({ onSubmit } : SearchProps) => {
   }
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newKeywords = e.target.value
+    const newKeywords = e.target.value;
     setKeywords(newKeywords);
   }
 

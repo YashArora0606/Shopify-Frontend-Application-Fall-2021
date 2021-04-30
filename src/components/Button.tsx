@@ -14,7 +14,6 @@ export type ButtonProps = {
     text?: string;
     click: () => any;
     type: ButtonType;
-    additionalClassName?: string;
     icon?: string;
     disabled: boolean;
 }
@@ -25,7 +24,7 @@ export enum ButtonType {
     Blank
 }
 
-const Button = ({ text, click, type, additionalClassName, icon, disabled} : ButtonProps) => {
+const Button = ({ text, click, type, icon, disabled} : ButtonProps) => {
 
     const [style, setStyle] = useState({});  
     const theme = useContext<ThemeType>(ThemeContext);
@@ -79,9 +78,10 @@ const Button = ({ text, click, type, additionalClassName, icon, disabled} : Butt
     return (
         <div>
             <button
-                className={"button " + (additionalClassName ? (" " + additionalClassName) : "")}
+                className={"button"}
                 onClick={click}
                 style={style}
+                disabled={disabled}
             >
                 {icon && <FontAwesomeIcon icon={icon as IconProp} />}
                 {text}
