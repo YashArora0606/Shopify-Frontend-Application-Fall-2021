@@ -10,7 +10,11 @@ type CustomDropdownProps = {
     onItemSelection: (item: string) => void;
 };
 
-const CustomDropdown = ({ title, items, onItemSelection }: CustomDropdownProps) => {
+const CustomDropdown = ({
+    title,
+    items,
+    onItemSelection,
+}: CustomDropdownProps) => {
     const theme = useContext<ThemeModel>(ThemeContext);
 
     return (
@@ -21,7 +25,9 @@ const CustomDropdown = ({ title, items, onItemSelection }: CustomDropdownProps) 
                     backgroundColor: theme.accent,
                     color: theme.container,
                 }}
-            >{title && `${title} `}</Dropdown.Toggle>
+            >
+                {title && `${title} `}
+            </Dropdown.Toggle>
             <Dropdown.Menu
                 className="custom-dropdown-menu"
                 style={{ backgroundColor: theme.container }}

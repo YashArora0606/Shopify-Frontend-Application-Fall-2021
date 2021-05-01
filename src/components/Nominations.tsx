@@ -43,7 +43,11 @@ const Nominations = ({
                     );
                 })}
             </div>
-            {nominationsList.length > 0 && <p className="text">Your nominations have been saved successfully!</p>}
+            {nominationsList.length > 0 && (
+                <p className="text">
+                    Your nominations have been saved successfully!
+                </p>
+            )}
         </Container>
     );
 };

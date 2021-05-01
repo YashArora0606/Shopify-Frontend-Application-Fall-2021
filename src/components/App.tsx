@@ -33,21 +33,28 @@ const App = () => {
 
     // Check localstorage in useEffect without dependancy array to avoid infinite loop
     useEffect(() => {
-      const checkLocalStorage = () => {
-          const storedNominations = JSON.parse(window.localStorage.getItem('nominations')!);
-          if (storedNominations) {
-              setMoviesNominationsList(storedNominations);
-          }
-          const storedTheme = window.localStorage.getItem('theme'); 
-          if (storedTheme) {
-            setThemeByTitle(storedTheme);
-          }
-      }
-      checkLocalStorage();
+        const checkLocalStorage = () => {
+            const storedNominations = JSON.parse(
+                window.localStorage.getItem("nominations")!
+            );
+            if (storedNominations) {
+                setMoviesNominationsList(storedNominations);
+            }
+            const storedTheme = window.localStorage.getItem("theme");
+            if (storedTheme) {
+                setThemeByTitle(storedTheme);
+            }
+        };
+        checkLocalStorage();
     }, []);
 
-    const saveNominationsListToLocalStorage = (nominationsList: MovieModel[]) => {
-        window.localStorage.setItem('nominations', JSON.stringify(nominationsList));
+    const saveNominationsListToLocalStorage = (
+        nominationsList: MovieModel[]
+    ) => {
+        window.localStorage.setItem(
+            "nominations",
+            JSON.stringify(nominationsList)
+        );
     };
 
     const removeNomination = (movie: MovieModel) => {
@@ -55,8 +62,8 @@ const App = () => {
             const filtered = list.filter((element) => {
                 return element.imdbID !== movie.imdbID;
             });
-            saveNominationsListToLocalStorage(filtered)
-            return filtered
+            saveNominationsListToLocalStorage(filtered);
+            return filtered;
         });
     };
 
@@ -70,7 +77,7 @@ const App = () => {
                 }).length === 0
             ) {
                 const appended = [...list, movie];
-                saveNominationsListToLocalStorage(appended)
+                saveNominationsListToLocalStorage(appended);
                 return appended;
             }
             return list;
@@ -86,11 +93,11 @@ const App = () => {
 
     const setThemeByTitle = (selectedThemeTitle: string) => {
         const themeToEnable = availableThemes.find((theme) => {
-            return theme.title === selectedThemeTitle
+            return theme.title === selectedThemeTitle;
         })!;
-        window.localStorage.setItem('theme', selectedThemeTitle);
+        window.localStorage.setItem("theme", selectedThemeTitle);
         setEnabledTheme(themeToEnable);
-    }
+    };
 
     return (
         <ThemeProvider theme={enabledTheme}>
@@ -98,13 +105,15 @@ const App = () => {
             <Fragment>
                 <div className="App">
                     <div className="head-bar">
-                      <div>
-                          <CustomDropdown
-                              items={availableThemes.map((theme) => theme.title)}
-                              onItemSelection={setThemeByTitle}
-                          />
-                      </div>
-                        
+                        <div>
+                            <CustomDropdown
+                                items={availableThemes.map(
+                                    (theme) => theme.title
+                                )}
+                                onItemSelection={setThemeByTitle}
+                            />
+                        </div>
+
                         <header className="header">
                             {"Welcome to the  "}
                             <span
