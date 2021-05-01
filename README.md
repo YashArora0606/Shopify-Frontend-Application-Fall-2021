@@ -24,6 +24,10 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Launches the test runner and generates an html view of the code coverage.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run cover`
+
+Cleans up all code using the prettier configurations.\
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
