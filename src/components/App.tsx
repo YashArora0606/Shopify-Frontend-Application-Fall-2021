@@ -33,21 +33,21 @@ const App = () => {
 
     // Check localstorage in useEffect without dependancy array to avoid infinite loop
     useEffect(() => {
-      const checkForLocallyStoredNominations = () => {
-          const storedNominations = getNominationsListFromLocalStorage();
+      const checkLocalStorage = () => {
+          const storedNominations = JSON.parse(window.localStorage.getItem('nominations')!);
           if (storedNominations) {
               setMoviesNominationsList(storedNominations);
           }
+          const storedTheme = window.localStorage.getItem('theme'); 
+          if (storedTheme) {
+            setThemeByTitle(storedTheme);
+          }
       }
-      checkForLocallyStoredNominations();
+      checkLocalStorage();
     }, []);
 
     const saveNominationsListToLocalStorage = (nominationsList: MovieModel[]) => {
         window.localStorage.setItem('nominations', JSON.stringify(nominationsList));
-    };
-
-    const getNominationsListFromLocalStorage = () => {
-        return JSON.parse(window.localStorage.getItem('nominations')!);
     };
 
     const removeNomination = (movie: MovieModel) => {
@@ -84,11 +84,12 @@ const App = () => {
         setLastKeywords(keywords);
     };
 
-    const selectThemeByTitle = (selectedThemeTitle: string) => {
-      const themeToEnable = availableThemes.find((theme) => {
-          return theme.title === selectedThemeTitle
-      })!;
-      setEnabledTheme(themeToEnable);
+    const setThemeByTitle = (selectedThemeTitle: string) => {
+        const themeToEnable = availableThemes.find((theme) => {
+            return theme.title === selectedThemeTitle
+        })!;
+        window.localStorage.setItem('theme', selectedThemeTitle);
+        setEnabledTheme(themeToEnable);
     }
 
     return (
@@ -100,7 +101,7 @@ const App = () => {
                       <div>
                           <CustomDropdown
                               items={availableThemes.map((theme) => theme.title)}
-                              onItemSelection={selectThemeByTitle}
+                              onItemSelection={setThemeByTitle}
                           />
                       </div>
                         
