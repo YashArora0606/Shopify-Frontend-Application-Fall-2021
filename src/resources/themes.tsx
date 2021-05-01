@@ -1,4 +1,4 @@
-import { ThemeModel } from "./models/theme.model";
+import { ThemeModel } from "../models/theme.model";
 
 export const availableThemes: ThemeModel[] = [
     {

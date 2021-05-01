@@ -1,44 +1,45 @@
 import React, { useContext } from "react";
 import { Dropdown } from "react-bootstrap";
-import "./ThemeSelector.scss";
-import { availableThemes } from "../themes";
+import "./CustomDropdown.scss";
 import { ThemeModel } from "../models/theme.model";
 import { ThemeContext } from "styled-components";
 
-type ThemeSelectorProps = {
-    onThemeSelection: (theme: ThemeModel) => void;
+type CustomDropdownProps = {
+    title?: string;
+    items: string[];
+    onItemSelection: (item: string) => void;
 };
 
-const ThemeSelector = ({ onThemeSelection }: ThemeSelectorProps) => {
+const CustomDropdown = ({ title, items, onItemSelection }: CustomDropdownProps) => {
     const theme = useContext<ThemeModel>(ThemeContext);
 
     return (
         <Dropdown>
             <Dropdown.Toggle
-                className="theme-selector"
+                className="custom-dropdown"
                 style={{
                     backgroundColor: theme.accent,
                     color: theme.container,
                 }}
-            />
+            >{title && `${title} `}</Dropdown.Toggle>
             <Dropdown.Menu
-                className="theme-selector-menu"
+                className="custom-dropdown-menu"
                 style={{ backgroundColor: theme.container }}
             >
-                {availableThemes.map((availableTheme) => {
+                {items.map((item) => {
                     return (
                         <Dropdown.Item
-                            key={availableTheme.title}
+                            key={item}
                             as="button"
-                            className="theme-selector-menu-item"
+                            className="custom-dropdown-menu-item"
                             style={{
                                 color: theme.text,
                             }}
                             onClick={() => {
-                                onThemeSelection(availableTheme);
+                                onItemSelection(item);
                             }}
                         >
-                            {availableTheme.title}
+                            {item}
                         </Dropdown.Item>
                     );
                 })}
@@ -47,4 +48,4 @@ const ThemeSelector = ({ onThemeSelection }: ThemeSelectorProps) => {
     );
 };
 
-export default ThemeSelector;
+export default CustomDropdown;
