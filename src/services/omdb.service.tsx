@@ -2,7 +2,7 @@ import axios from "axios";
 import { MovieModel } from "../models/movie.model";
 
 // See http://www.omdbapi.com/ for API documentation
-const OMDB_URL = "http://www.omdbapi.com/";
+const OMDB_URL = "https://www.omdbapi.com/";
 const OMDB_API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
 export const getMoviesByKeywords = async (keywords: string) => {
