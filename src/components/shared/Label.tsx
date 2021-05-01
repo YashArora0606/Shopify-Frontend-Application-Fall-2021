@@ -23,7 +23,7 @@ const Label = ({
     const theme = useContext<ThemeModel>(ThemeContext);
 
     const [buttonProps, setButtonProps] = useState<ButtonProps>({
-        click: click,
+        onClick: click,
         type: buttonType,
         icon: icon,
         disabled: false,

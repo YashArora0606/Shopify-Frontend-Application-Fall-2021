@@ -17,7 +17,7 @@ const Search = ({ onSubmit }: SearchProps) => {
     const [keywords, setKeywords] = useState<string>("");
 
     var submitButtonProps = {
-        click: () => {
+        onClick: () => {
             onSubmit(keywords);
         },
         text: "Go",
@@ -26,7 +26,7 @@ const Search = ({ onSubmit }: SearchProps) => {
     };
 
     var resetButtonProps = {
-        click: () => {
+        onClick: () => {
             setKeywords("");
         },
         type: ButtonType.Blank,
@@ -48,6 +48,9 @@ const Search = ({ onSubmit }: SearchProps) => {
     return (
         <Container>
             <FontAwesomeIcon
+                onClick={() => {
+                    onSubmit(keywords);
+                }}
                 className="search-icon"
                 icon={faSearch}
                 size="2x"

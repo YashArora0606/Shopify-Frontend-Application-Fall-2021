@@ -12,7 +12,7 @@ library.add(faTimes, faPlus, faMinus);
 
 export type ButtonProps = {
     text?: string;
-    click: () => any;
+    onClick: () => any;
     type: ButtonType;
     icon?: string;
     disabled: boolean;
@@ -24,7 +24,7 @@ export enum ButtonType {
     Blank,
 }
 
-const Button = ({ text, click, type, icon, disabled }: ButtonProps) => {
+const Button = ({ text, onClick, type, icon, disabled }: ButtonProps) => {
     const [style, setStyle] = useState({});
     const theme = useContext<ThemeModel>(ThemeContext);
 
@@ -75,8 +75,8 @@ const Button = ({ text, click, type, icon, disabled }: ButtonProps) => {
     return (
         <div>
             <button
-                className={"button"}
-                onClick={click}
+                className="button"
+                onClick={onClick}
                 style={style}
                 disabled={disabled}
             >
