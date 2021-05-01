@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Test it out!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+https://shopify-frontend-yash-arora.netlify.app/
 
 ## Available Scripts
 
