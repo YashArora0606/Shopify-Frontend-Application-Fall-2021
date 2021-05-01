@@ -42,7 +42,7 @@ const App = () => {
     const nominateMovie = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
             if (list.length >= NOMINATION_LIMIT) {
-                console.log("can't add since list is full");
+                // console.log("can't add since list is full");
             } else if (
                 list.filter((entry) => {
                     return entry.imdbID === movie.imdbID;
@@ -55,10 +55,10 @@ const App = () => {
     };
 
     const makeMovieSearchQuery = async (keywords: string) => {
-        setLastKeywords(keywords);
         const omdbReponse = await getMoviesByKeywords(keywords);
-        console.log(omdbReponse);
+        // console.log(omdbReponse);
         setMoviesSearchResults(omdbReponse);
+        setLastKeywords(keywords);
     };
 
     return (
