@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import GlobalStyles from "../globalStyles";
 import { ThemeProvider } from "styled-components";
-import { availableThemes } from "../themes";
+import { availableThemes } from "../resources/themes";
 import { getMoviesByKeywords } from "../services/omdb.service";
 import "./App.scss";
 import Search from "./Search";
@@ -10,7 +10,7 @@ import Nominations from "./Nominations";
 import { MovieModel } from "../models/movie.model";
 import Banner from "./Banner";
 import { ThemeModel } from "../models/theme.model";
-import ThemeSelector from "./ThemeSelector";
+import CustomDropdown from "./CustomDropdown";
 
 const App = () => {
     const NOMINATION_LIMIT = 5;
@@ -31,11 +31,39 @@ const App = () => {
         setShowBanner(moviesNominationsList.length === NOMINATION_LIMIT);
     }, [moviesNominationsList]);
 
+    // Check localstorage in useEffect without dependancy array to avoid infinite loop
+    useEffect(() => {
+        const checkLocalStorage = () => {
+            const storedNominations = JSON.parse(
+                window.localStorage.getItem("nominations")!
+            );
+            if (storedNominations) {
+                setMoviesNominationsList(storedNominations);
+            }
+            const storedTheme = window.localStorage.getItem("theme");
+            if (storedTheme) {
+                setThemeByTitle(storedTheme);
+            }
+        };
+        checkLocalStorage();
+    }, []);
+
+    const saveNominationsListToLocalStorage = (
+        nominationsList: MovieModel[]
+    ) => {
+        window.localStorage.setItem(
+            "nominations",
+            JSON.stringify(nominationsList)
+        );
+    };
+
     const removeNomination = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
-            return list.filter((element) => {
+            const filtered = list.filter((element) => {
                 return element.imdbID !== movie.imdbID;
             });
+            saveNominationsListToLocalStorage(filtered);
+            return filtered;
         });
     };
 
@@ -48,17 +76,27 @@ const App = () => {
                     return entry.imdbID === movie.imdbID;
                 }).length === 0
             ) {
-                return [...list, movie];
+                const appended = [...list, movie];
+                saveNominationsListToLocalStorage(appended);
+                return appended;
             }
             return list;
         });
     };
 
-    const makeMovieSearchQuery = async (keywords: string) => {
+    const searchForMovie = async (keywords: string) => {
         const omdbReponse = await getMoviesByKeywords(keywords);
         // console.log(omdbReponse);
         setMoviesSearchResults(omdbReponse);
         setLastKeywords(keywords);
+    };
+
+    const setThemeByTitle = (selectedThemeTitle: string) => {
+        const themeToEnable = availableThemes.find((theme) => {
+            return theme.title === selectedThemeTitle;
+        })!;
+        window.localStorage.setItem("theme", selectedThemeTitle);
+        setEnabledTheme(themeToEnable);
     };
 
     return (
@@ -67,28 +105,33 @@ const App = () => {
             <Fragment>
                 <div className="App">
                     <div className="head-bar">
-                        <ThemeSelector
-                            onThemeSelection={(selectedTheme) => {
-                                setEnabledTheme(selectedTheme);
-                            }}
-                        />
+                        <div>
+                            <CustomDropdown
+                                items={availableThemes.map(
+                                    (theme) => theme.title
+                                )}
+                                onItemSelection={setThemeByTitle}
+                            />
+                        </div>
+
                         <header className="header">
-                            Welcome to the{" "}
+                            {"Welcome to the  "}
                             <span
                                 style={{
                                     color: enabledTheme.accent,
                                 }}
                             >
-                                <b>Shoppies!</b>
+                                <b>{"Shoppies!"}</b>
                             </span>
                         </header>
                         <div className="subtitle">
-                            Nominate your <b>5 favourite movies</b> for this
-                            year's award show!{" "}
+                            {"Nominate your "}
+                            <b>{"5 favourite movies"}</b>
+                            {" for this year's award show!"}
                         </div>
                     </div>
                     <div className="content">
-                        <Search onSubmit={makeMovieSearchQuery} />
+                        <Search onSubmit={searchForMovie} />
                         {showBanner && (
                             <Banner text="You've reached the maximum number of movie nominations." />
                         )}

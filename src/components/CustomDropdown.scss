@@ -1,7 +1,8 @@
 // Ensure  that all necessary bootstrap css is overriden
 
-.theme-selector {
+.custom-dropdown {
     float: right !important;
+    margin-left: 1rem;
     padding: 0.5em 1.2em !important;
     border: none !important;
     outline: none !important;
@@ -10,25 +11,25 @@
     -webkit-appearance: none !important;
 }
 
-.theme-selector:hover {
+.custom-dropdown:hover {
+    box-shadow: 0px 0px 10px rgba(207, 205, 205, 0.6) !important;
+}
+
+.custom-dropdown:focus {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) !important;
 }
 
-.theme-selector:focus {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) !important;
-}
-
-.theme-selector-menu {
+.custom-dropdown-menu {
     border: none !important;
     outline: none !important;
     border-radius: 1rem !important;
     box-shadow: 0 0 10px rgba(33, 33, 33, 0.6) !important;
 }
 
-.theme-selector-menu-item {
+.custom-dropdown-menu-item {
     border-radius: 0.5em !important;
 }
 
-.theme-selector-menu-item:hover {
+.custom-dropdown-menu-item:hover {
     background: rgba(0, 0, 0, 0.1) !important;
 }
