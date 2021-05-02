@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
     Roboto, Helvetica Neue, sans-serif;
   }
 
+  // Add theme and overriding to polaris styled components 
+
   html {
     position: relative;
     font-size: 100%;
@@ -38,6 +40,15 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
   
   .entries {
     padding-left: 1rem;
+  }
+
+  .Polaris-Popover__Wrapper {
+    background: ${({ theme }) => `${theme.container}`};
+    color: ${({ theme }) => `${theme.text}`};
+  }
+
+  .Polaris-ActionList__Item:hover {
+      background: rgba(0, 0, 0, 0.1);
   }
 
   `;

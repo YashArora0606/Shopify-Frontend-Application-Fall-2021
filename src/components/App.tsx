@@ -25,10 +25,10 @@ const App = () => {
         MovieModel[]
     >([]);
     const [lastKeywords, setLastKeywords] = useState<string>("");
-    const [showBanner, setShowBanner] = useState<boolean>(false);
+    const [bannerMessage, setBannerMessage] = useState<string>("");
 
     useEffect(() => {
-        setShowBanner(moviesNominationsList.length === NOMINATION_LIMIT);
+        moviesNominationsList.length === NOMINATION_LIMIT ? setBannerMessage(`You've reached the limit of ${NOMINATION_LIMIT} movie nominations.`): setBannerMessage("");
     }, [moviesNominationsList]);
 
     // Check localstorage in useEffect without dependancy array to avoid infinite loop
@@ -69,12 +69,13 @@ const App = () => {
 
     const clearNominations = () => {
         setMoviesNominationsList([]);
-        saveNominationsListToLocalStorage([]);
     };
 
     const nominateMovie = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
-            if (list.length < NOMINATION_LIMIT) {
+            if (list.length >= NOMINATION_LIMIT) {
+                setBannerMessage("Your list is full! Remove some nominations before adding more.");
+            } else if (list.length < NOMINATION_LIMIT) {
                 return [...list, movie];
             }
             return list;
@@ -131,8 +132,8 @@ const App = () => {
                     </div>
                     <div className="content">
                         <Search onSubmit={searchForMovie} />
-                        {showBanner && (
-                            <Banner text="You've reached the maximum number of movie nominations." />
+                        {bannerMessage.length > 0 && (
+                            <Banner text={bannerMessage} />
                         )}
                         <div className="two-column-wrapper">
                             <Results

@@ -76,7 +76,7 @@ const Nominations = ({
                 </div>
             )}
             {showSavedSuccessfullyBanner && (
-                <Banner text="Your nominations have been saved!" />
+                <Banner text="Your nominations have been saved successfully!" />
             )}
         </Container>
     );

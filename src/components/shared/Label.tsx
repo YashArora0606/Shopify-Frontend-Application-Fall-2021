@@ -41,14 +41,14 @@ const Label = ({
     return (
         <div className="label">
             <Button {...buttonProps} />
-            <span> 
+            <div> 
                 <button className="label-data" onClick={() => {onTextClick()}}>
                     <div className="label-title" style={{ color: theme.text }}>{data.Title}</div>
                     <div className="label-subtitle" style={{ color: theme.accent }}>
                         {`${data.Year}`}
                     </div>
                 </button>
-            </span>
+            </div>
         </div>
     );
 };

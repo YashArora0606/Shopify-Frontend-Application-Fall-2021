@@ -1,11 +1,9 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import "./CustomDropdown.scss";
 import { ThemeModel } from "../models/theme.model";
 import { ThemeContext } from "styled-components";
 import { ActionList, Popover } from "@shopify/polaris";
 import Button, { ButtonType } from "./shared/Button";
-import Container from "./shared/Container";
 
 type DropdownItemType = {
     content: string;
@@ -27,28 +25,37 @@ const CustomDropdown = ({
       () => setPopoverActive((popoverActive) => !popoverActive),
       [],
     );
+
+    const style = {
+        backgroundColor: theme.background
+    }
   
     const activator = (
         <div className="custom-dropdown">
             <Button 
                 onClick={() => {togglePopoverActive()}}
-                icon="times"
+                icon="caret-down"
                 type={ButtonType.Primary}
                 disabled={false}
             />
         </div>
-
     );
 
     return (
+    
+    
+    <div style={style}>
         <Popover
             active={popoverActive}
             activator={activator}
             onClose={togglePopoverActive}
+            preferredAlignment="right"
         >
             <ActionList
                 items={items} />
         </Popover>
+    </div>
+
     )
 
     // return (
