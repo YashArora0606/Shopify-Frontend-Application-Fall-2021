@@ -3,7 +3,6 @@ import GlobalStyles from "../globalStyles";
 import { ThemeProvider } from "styled-components";
 import { availableThemes } from "../resources/themes";
 import {
-    getMovieByImdbID,
     getMoviesByKeywords,
 } from "../utils/omdbAPI.service";
 import "./App.scss";
@@ -11,9 +10,10 @@ import Search from "./Search";
 import Results from "./Results";
 import Nominations from "./Nominations";
 import { MovieModel } from "../models/movie.model";
-import Banner from "./Banner";
+import Banner from "./shared/Banner";
 import { ThemeModel } from "../models/theme.model";
 import CustomDropdown from "./CustomDropdown";
+import MovieInfo from "./MovieInfo";
 
 const App = () => {
     const NOMINATION_LIMIT = 5;
@@ -29,6 +29,8 @@ const App = () => {
     >([]);
     const [lastKeywords, setLastKeywords] = useState<string>("");
     const [bannerMessage, setBannerMessage] = useState<string>("");
+
+    const [movieInfoID, setMovieInfoID] = useState<string>("");
 
     useEffect(() => {
         moviesNominationsList.length === NOMINATION_LIMIT
@@ -54,7 +56,12 @@ const App = () => {
                 applyTheme(storedTheme);
             }
         };
-        checkLocalStorage();
+        try {
+            checkLocalStorage();
+        } catch (e) {
+            localStorage.clear();
+        }
+
     }, []);
 
     const saveNominationsListToLocalStorage = (
@@ -102,15 +109,24 @@ const App = () => {
         setEnabledTheme(themeToApply);
     };
 
-    const showMovieInfo = async (id: string) => {
-        const detailedMovieInfo = await getMovieByImdbID(id);
-        console.log(detailedMovieInfo);
+    const showMovieInfo = (id: string) => {
+        setMovieInfoID(id)
     };
+
+    const closeMovieInfo = () => {
+        setMovieInfoID("")
+    }
 
     return (
         <ThemeProvider theme={enabledTheme}>
             <GlobalStyles />
             <Fragment>
+                <div>
+                    <MovieInfo
+                        imdbID={movieInfoID}
+                        onCloseMovieInfo={closeMovieInfo}
+                    />
+                </div>
                 <div className="App">
                     <div className="head-bar">
                         <div>

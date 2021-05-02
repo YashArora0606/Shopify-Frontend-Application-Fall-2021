@@ -51,6 +51,15 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
       background: rgba(0, 0, 0, 0.1);
   }
 
+  .Polaris-Modal-Dialog__Modal {
+    max-width: 768px !important;
+    background: ${({ theme }) => `${theme.container}`};
+    color: ${({ theme }) => `${theme.text}`};
+  }
+
+  .Polaris-Modal-CloseButton:hover {
+    background: ${({ theme }) => `${theme.accent}`};
+  }
   `;
 
 export default GlobalStyles;

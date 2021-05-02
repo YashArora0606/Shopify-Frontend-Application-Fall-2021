@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { ThemeModel } from "../models/theme.model";
+import { ThemeModel } from "../../models/theme.model";
 import "./Banner.scss";
-import Container from "./shared/Container";
+import Container from "./Container";
 
 type BannerProps = {
     text: string;

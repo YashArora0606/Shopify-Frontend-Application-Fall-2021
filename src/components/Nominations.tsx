@@ -4,7 +4,7 @@ import Container from "./shared/Container";
 import Label from "./shared/Label";
 import { MovieModel } from "../models/movie.model";
 import Button, { ButtonType } from "./shared/Button";
-import Banner from "./Banner";
+import Banner from "./shared/Banner";
 
 type NominationsProps = {
     onRemoveNomination: (entry: MovieModel) => any;
