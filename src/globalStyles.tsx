@@ -52,13 +52,40 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
   }
 
   .Polaris-Modal-Dialog__Modal {
-    max-width: 768px !important;
+    max-width: 80% !important;
+    border-radius: 2rem;
     background: ${({ theme }) => `${theme.container}`};
     color: ${({ theme }) => `${theme.text}`};
   }
 
+  .Polaris-Modal-CloseButton {
+    padding: 0.5em 1.1em;
+    margin: 1em 0.3em 0.3em 0.1em;
+    border-radius: 2em;
+    background: ${({ theme }) => `${theme.container}`};
+  }
+
+  .Polaris-Icon__Svg {
+    fill: ${({ theme }) => `${theme.text} !important`};
+  }
+
   .Polaris-Modal-CloseButton:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
     background: ${({ theme }) => `${theme.accent}`};
+    filter: brightness(90%);
+    .Polaris-Icon__Svg {
+      fill: ${({ theme }) => `${theme.background} !important`};
+    }
+  }
+
+  @media (max-width: 768px) {
+    .Polaris-Modal-Dialog__Modal {
+        border-radius: 0;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+
+        max-width: 100% !important;
+    }
   }
   `;
 

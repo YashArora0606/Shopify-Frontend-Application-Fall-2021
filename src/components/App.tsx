@@ -3,6 +3,7 @@ import GlobalStyles from "../globalStyles";
 import { ThemeProvider } from "styled-components";
 import { availableThemes } from "../resources/themes";
 import {
+    getDetailedMovieByImdbID,
     getMoviesByKeywords,
 } from "../utils/omdbAPI.service";
 import "./App.scss";
@@ -61,7 +62,6 @@ const App = () => {
         } catch (e) {
             localStorage.clear();
         }
-
     }, []);
 
     const saveNominationsListToLocalStorage = (
@@ -98,6 +98,11 @@ const App = () => {
         });
     };
 
+    const nominateMovieByID = async (id: string) => {
+        const detailedMovie = await getDetailedMovieByImdbID(id);
+        nominateMovie(detailedMovie);
+    };
+
     const searchForMovie = async (keywords: string) => {
         const omdbReponse = await getMoviesByKeywords(keywords);
         setMoviesSearchResults(omdbReponse);
@@ -110,12 +115,12 @@ const App = () => {
     };
 
     const showMovieInfo = (id: string) => {
-        setMovieInfoID(id)
+        setMovieInfoID(id);
     };
 
     const closeMovieInfo = () => {
-        setMovieInfoID("")
-    }
+        setMovieInfoID("");
+    };
 
     return (
         <ThemeProvider theme={enabledTheme}>
@@ -125,6 +130,8 @@ const App = () => {
                     <MovieInfo
                         imdbID={movieInfoID}
                         onCloseMovieInfo={closeMovieInfo}
+                        nominateByID={nominateMovieByID}
+                        nominationsList={moviesNominationsList}
                     />
                 </div>
                 <div className="App">

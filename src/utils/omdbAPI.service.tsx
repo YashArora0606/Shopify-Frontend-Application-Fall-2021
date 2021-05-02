@@ -42,7 +42,7 @@ export const getMoviesByKeywords = async (keywords: string) => {
         });
 };
 
-export const getMovieByImdbID = async (imdbID: string) => {
+export const getDetailedMovieByImdbID = async (imdbID: string) => {
     return axios
         .get(OMDB_URL, {
             params: {

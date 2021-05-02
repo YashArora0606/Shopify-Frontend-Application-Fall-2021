@@ -1,0 +1,63 @@
+.movie-info-area {
+    display: flex;
+    flex-direction: row;
+    // outline: 2px solid red;
+    padding: 1rem;
+}
+
+.movie-info-text-area {
+    width: 100%;
+    margin-top: 2rem;
+    margin-left: 3rem;
+}
+
+.movie-poster {
+    border-radius: 2rem;
+    display: block;
+    object-fit: cover;
+
+    max-width: 30rem;
+    max-height: 30rem;
+    width: auto;
+    height: auto;
+}
+
+.movie-title {
+    font-size: xx-large;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}
+
+.movie-year {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.movie-director {
+    font-weight: bold;
+}
+
+.movie-actors {
+    font-weight: bold;
+}
+
+.movie-nomination-button {
+    float: right;
+    padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .movie-poster {
+        visibility: hidden;
+        max-height: 0;
+        height: 0%;
+    }
+    .movie-info-text-area {
+        margin-top: 2rem;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    .movie-info-area {
+        padding-left: 0rem;
+    }
+}
