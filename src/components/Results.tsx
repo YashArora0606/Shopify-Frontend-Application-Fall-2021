@@ -9,7 +9,7 @@ type ResultsProps = {
     searchResults: MovieModel[];
     currentQuery: string;
     nominationsList: MovieModel[];
-    displayMovieInfo:(imdbID: string) => any;
+    displayMovieInfo: (imdbID: string) => any;
     onNomination: (movie: MovieModel) => void;
 };
 

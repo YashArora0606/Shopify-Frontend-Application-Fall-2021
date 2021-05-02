@@ -43,22 +43,19 @@ export const getMoviesByKeywords = async (keywords: string) => {
 };
 
 export const getMovieByImdbID = async (imdbID: string) => {
-
     return axios
-    .get(OMDB_URL, {
-        params: {
-            apikey: OMDB_API_KEY,
-            i: imdbID,
-            type: "movie",
-        },
-    })
-    .then((response) => {
-
-        const movie: DetailedMovieModel = response.data;
-        return movie;
-
-    })
-    .catch((error) => {
-        return error;
-    });
+        .get(OMDB_URL, {
+            params: {
+                apikey: OMDB_API_KEY,
+                i: imdbID,
+                type: "movie",
+            },
+        })
+        .then((response) => {
+            const movie: DetailedMovieModel = response.data;
+            return movie;
+        })
+        .catch((error) => {
+            return error;
+        });
 };

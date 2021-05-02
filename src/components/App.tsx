@@ -2,7 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import GlobalStyles from "../globalStyles";
 import { ThemeProvider } from "styled-components";
 import { availableThemes } from "../resources/themes";
-import { getMovieByImdbID, getMoviesByKeywords } from "../utils/omdbAPI.service";
+import {
+    getMovieByImdbID,
+    getMoviesByKeywords,
+} from "../utils/omdbAPI.service";
 import "./App.scss";
 import Search from "./Search";
 import Results from "./Results";
@@ -28,7 +31,11 @@ const App = () => {
     const [bannerMessage, setBannerMessage] = useState<string>("");
 
     useEffect(() => {
-        moviesNominationsList.length === NOMINATION_LIMIT ? setBannerMessage(`You've reached the limit of ${NOMINATION_LIMIT} movie nominations.`): setBannerMessage("");
+        moviesNominationsList.length === NOMINATION_LIMIT
+            ? setBannerMessage(
+                  `You've reached the limit of ${NOMINATION_LIMIT} movie nominations.`
+              )
+            : setBannerMessage("");
     }, [moviesNominationsList]);
 
     // Check localstorage in useEffect without dependancy array to avoid infinite loop
@@ -74,7 +81,9 @@ const App = () => {
     const nominateMovie = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
             if (list.length >= NOMINATION_LIMIT) {
-                setBannerMessage("Your list is full! Remove some nominations before adding more.");
+                setBannerMessage(
+                    "Your list is full! Remove some nominations before adding more."
+                );
             } else if (list.length < NOMINATION_LIMIT) {
                 return [...list, movie];
             }
@@ -95,8 +104,8 @@ const App = () => {
 
     const showMovieInfo = async (id: string) => {
         const detailedMovieInfo = await getMovieByImdbID(id);
-        console.log(detailedMovieInfo)
-    }  
+        console.log(detailedMovieInfo);
+    };
 
     return (
         <ThemeProvider theme={enabledTheme}>
@@ -106,11 +115,14 @@ const App = () => {
                     <div className="head-bar">
                         <div>
                             <CustomDropdown
-                                items={availableThemes.map(
-                                    (theme) => { 
-                                        return { content: theme.title, onAction: () => {applyTheme(theme)} }
-                                    }
-                                )}
+                                items={availableThemes.map((theme) => {
+                                    return {
+                                        content: theme.title,
+                                        onAction: () => {
+                                            applyTheme(theme);
+                                        },
+                                    };
+                                })}
                             />
                         </div>
 

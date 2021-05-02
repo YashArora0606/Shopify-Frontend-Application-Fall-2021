@@ -9,7 +9,9 @@ import "@shopify/polaris/dist/styles.css";
 
 ReactDOM.render(
     <React.StrictMode>
-        <AppProvider i18n={en}><App /></AppProvider>
+        <AppProvider i18n={en}>
+            <App />
+        </AppProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

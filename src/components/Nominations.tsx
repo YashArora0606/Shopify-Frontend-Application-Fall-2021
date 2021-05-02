@@ -10,7 +10,7 @@ type NominationsProps = {
     onRemoveNomination: (entry: MovieModel) => any;
     onClearNominations: () => any;
     onSaveNominations: (nominations: MovieModel[]) => any;
-    displayMovieInfo:(imdbID: string) => any;
+    displayMovieInfo: (imdbID: string) => any;
     nominationsList: MovieModel[];
 };
 
@@ -49,7 +49,9 @@ const Nominations = ({
                             onButtonClick={() => {
                                 onRemoveNomination(entry);
                             }}
-                            onTextClick={() => {displayMovieInfo(entry.imdbID)}}
+                            onTextClick={() => {
+                                displayMovieInfo(entry.imdbID);
+                            }}
                             key={entry.imdbID}
                             data={entry}
                         />

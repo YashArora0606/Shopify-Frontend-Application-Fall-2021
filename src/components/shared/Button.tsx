@@ -6,7 +6,12 @@ import { ThemeModel } from "../../models/theme.model";
 import { useState } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTimes, faPlus, faMinus, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import {
+    faTimes,
+    faPlus,
+    faMinus,
+    faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTimes, faPlus, faMinus, faCaretDown);
 

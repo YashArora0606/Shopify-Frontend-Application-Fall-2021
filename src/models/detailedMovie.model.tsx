@@ -1,7 +1,7 @@
 type RatingsModel = {
     Source: string;
     Value: string;
-}
+};
 
 export type DetailedMovieModel = {
     Title: string;
