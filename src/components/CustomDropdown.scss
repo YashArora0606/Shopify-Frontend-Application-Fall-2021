@@ -1,22 +1,6 @@
-// Ensure  that all necessary bootstrap css is overriden
-
 .custom-dropdown {
-    float: right !important;
+    float: right;
     margin-left: 1rem;
-    padding: 0.5em 1.2em !important;
-    border: none !important;
-    outline: none !important;
-    border-radius: 2em !important;
-    box-sizing: border-box !important;
-    -webkit-appearance: none !important;
-}
-
-.custom-dropdown:hover {
-    box-shadow: 0px 0px 10px rgba(207, 205, 205, 0.6) !important;
-}
-
-.custom-dropdown:focus {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) !important;
 }
 
 .custom-dropdown-menu {

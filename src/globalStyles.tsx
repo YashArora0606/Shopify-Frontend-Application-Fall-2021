@@ -12,9 +12,21 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
     Roboto, Helvetica Neue, sans-serif;
   }
 
-  body {
-    background: ${({ theme }) => theme.background};
+  html {
+    position: relative;
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
     color: ${({ theme }) => theme.text};
+  } 
+
+  body {
+    font-size: 100%;
+    background: ${({ theme }) => `${theme.background} !important`};
+    color: ${({ theme }) => `${theme.text} !important`};
   }
   
   .text {

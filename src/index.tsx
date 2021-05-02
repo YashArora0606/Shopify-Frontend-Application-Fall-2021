@@ -1,13 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "@shopify/polaris/dist/styles.css";
 import "./index.css";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { AppProvider } from "@shopify/polaris";
+import en from "@shopify/polaris/locales/en.json";
+
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <AppProvider i18n={en}><App /></AppProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

@@ -40,9 +40,11 @@ const App = () => {
             if (storedNominations) {
                 setMoviesNominationsList(storedNominations);
             }
-            const storedTheme = window.localStorage.getItem("theme");
+            const storedTheme = JSON.parse(
+                window.localStorage.getItem("theme")!
+            );
             if (storedTheme) {
-                setThemeByTitle(storedTheme);
+                applyTheme(storedTheme);
             }
         };
         checkLocalStorage();
@@ -85,12 +87,9 @@ const App = () => {
         setLastKeywords(keywords);
     };
 
-    const setThemeByTitle = (selectedThemeTitle: string) => {
-        const themeToEnable = availableThemes.find((theme) => {
-            return theme.title === selectedThemeTitle;
-        })!;
-        window.localStorage.setItem("theme", selectedThemeTitle);
-        setEnabledTheme(themeToEnable);
+    const applyTheme = (themeToApply: ThemeModel) => {
+        window.localStorage.setItem("theme", JSON.stringify(themeToApply));
+        setEnabledTheme(themeToApply);
     };
 
     const showMovieInfo = async (id: string) => {
@@ -107,9 +106,10 @@ const App = () => {
                         <div>
                             <CustomDropdown
                                 items={availableThemes.map(
-                                    (theme) => theme.title
+                                    (theme) => { 
+                                        return { content: theme.title, onAction: () => {applyTheme(theme)} }
+                                    }
                                 )}
-                                onItemSelection={setThemeByTitle}
                             />
                         </div>
 
