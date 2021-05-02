@@ -3,20 +3,30 @@ import "./Nominations.scss";
 import Container from "./shared/Container";
 import Label from "./shared/Label";
 import { MovieModel } from "../models/movie.model";
-import { ButtonType } from "./shared/Button";
+import Button, { ButtonType } from "./shared/Button";
+import Banner from "./Banner";
 
 type NominationsProps = {
     onRemoveNomination: (entry: MovieModel) => any;
+    onClearNominations: () => any;
+    onSaveNominations: (nominations: MovieModel[]) => any;
     nominationsList: MovieModel[];
 };
 
 const Nominations = ({
     nominationsList,
     onRemoveNomination,
+    onClearNominations,
+    onSaveNominations,
 }: NominationsProps) => {
     const [text, setText] = useState<string>("");
+    const [
+        showSavedSuccessfullyBanner,
+        setShowSavedSuccessfullyBanner,
+    ] = useState<boolean>(false);
 
     useEffect(() => {
+        setShowSavedSuccessfullyBanner(false);
         if (nominationsList.length === 0) {
             setText("Nominate a movie to get started!");
         } else {
@@ -44,9 +54,26 @@ const Nominations = ({
                 })}
             </div>
             {nominationsList.length > 0 && (
-                <p className="text">
-                    Your nominations have been saved successfully!
-                </p>
+                <div className="nominations-list-operation-buttons">
+                    <Button
+                        type={ButtonType.Blank}
+                        text="Clear"
+                        onClick={onClearNominations}
+                        disabled={false}
+                    />
+                    <Button
+                        type={ButtonType.Primary}
+                        text="Save"
+                        onClick={() => {
+                            onSaveNominations(nominationsList);
+                            setShowSavedSuccessfullyBanner(true);
+                        }}
+                        disabled={false}
+                    />
+                </div>
+            )}
+            {showSavedSuccessfullyBanner && (
+                <Banner text="Your nominations have been saved!" />
             )}
         </Container>
     );

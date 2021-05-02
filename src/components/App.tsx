@@ -59,12 +59,15 @@ const App = () => {
 
     const removeNomination = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
-            const filtered = list.filter((element) => {
+            return list.filter((element) => {
                 return element.imdbID !== movie.imdbID;
             });
-            saveNominationsListToLocalStorage(filtered);
-            return filtered;
         });
+    };
+
+    const clearNominations = () => {
+        setMoviesNominationsList([]);
+        saveNominationsListToLocalStorage([]);
     };
 
     const nominateMovie = (movie: MovieModel) => {
@@ -76,9 +79,7 @@ const App = () => {
                     return entry.imdbID === movie.imdbID;
                 }).length === 0
             ) {
-                const appended = [...list, movie];
-                saveNominationsListToLocalStorage(appended);
-                return appended;
+                return [...list, movie];
             }
             return list;
         });
@@ -145,6 +146,10 @@ const App = () => {
                             <Nominations
                                 nominationsList={moviesNominationsList}
                                 onRemoveNomination={removeNomination}
+                                onClearNominations={clearNominations}
+                                onSaveNominations={
+                                    saveNominationsListToLocalStorage
+                                }
                             />
                         </div>
                     </div>
