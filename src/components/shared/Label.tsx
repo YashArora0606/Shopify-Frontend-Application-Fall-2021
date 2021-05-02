@@ -7,7 +7,8 @@ import { ThemeContext } from "styled-components";
 
 type LabelProps = {
     data: MovieModel;
-    click: () => any;
+    onButtonClick: () => any;
+    onTextClick: () => any;
     icon: string;
     buttonType: ButtonType;
     disableButton: boolean;
@@ -17,13 +18,14 @@ const Label = ({
     data,
     icon,
     buttonType,
-    click,
+    onButtonClick,
+    onTextClick,
     disableButton,
 }: LabelProps) => {
     const theme = useContext<ThemeModel>(ThemeContext);
 
     const [buttonProps, setButtonProps] = useState<ButtonProps>({
-        onClick: click,
+        onClick: onButtonClick,
         type: buttonType,
         icon: icon,
         disabled: false,
@@ -39,11 +41,13 @@ const Label = ({
     return (
         <div className="label">
             <Button {...buttonProps} />
-            <span>
-                <div className="label-title">{data.Title}</div>
-                <div className="label-data" style={{ color: theme.accent }}>
-                    {`${data.Year}`}
-                </div>
+            <span> 
+                <button className="label-data" onClick={() => {onTextClick()}}>
+                    <div className="label-title" style={{ color: theme.text }}>{data.Title}</div>
+                    <div className="label-subtitle" style={{ color: theme.accent }}>
+                        {`${data.Year}`}
+                    </div>
+                </button>
             </span>
         </div>
     );

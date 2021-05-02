@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import GlobalStyles from "../globalStyles";
 import { ThemeProvider } from "styled-components";
 import { availableThemes } from "../resources/themes";
-import { getMoviesByKeywords } from "../services/omdb.service";
+import { getMovieByImdbID, getMoviesByKeywords } from "../utils/omdbAPI.service";
 import "./App.scss";
 import Search from "./Search";
 import Results from "./Results";
@@ -72,13 +72,7 @@ const App = () => {
 
     const nominateMovie = (movie: MovieModel) => {
         setMoviesNominationsList((list) => {
-            if (list.length >= NOMINATION_LIMIT) {
-                // console.log("can't add since list is full");
-            } else if (
-                list.filter((entry) => {
-                    return entry.imdbID === movie.imdbID;
-                }).length === 0
-            ) {
+            if (list.length < NOMINATION_LIMIT) {
                 return [...list, movie];
             }
             return list;
@@ -87,7 +81,6 @@ const App = () => {
 
     const searchForMovie = async (keywords: string) => {
         const omdbReponse = await getMoviesByKeywords(keywords);
-        // console.log(omdbReponse);
         setMoviesSearchResults(omdbReponse);
         setLastKeywords(keywords);
     };
@@ -99,6 +92,11 @@ const App = () => {
         window.localStorage.setItem("theme", selectedThemeTitle);
         setEnabledTheme(themeToEnable);
     };
+
+    const showMovieInfo = async (id: string) => {
+        const detailedMovieInfo = await getMovieByImdbID(id);
+        console.log(detailedMovieInfo)
+    }  
 
     return (
         <ThemeProvider theme={enabledTheme}>
@@ -138,12 +136,14 @@ const App = () => {
                         )}
                         <div className="two-column-wrapper">
                             <Results
+                                displayMovieInfo={showMovieInfo}
                                 nominationsList={moviesNominationsList}
                                 searchResults={moviesSearchResults}
                                 currentQuery={lastKeywords}
                                 onNomination={nominateMovie}
                             />
                             <Nominations
+                                displayMovieInfo={showMovieInfo}
                                 nominationsList={moviesNominationsList}
                                 onRemoveNomination={removeNomination}
                                 onClearNominations={clearNominations}

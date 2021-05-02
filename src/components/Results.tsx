@@ -9,6 +9,7 @@ type ResultsProps = {
     searchResults: MovieModel[];
     currentQuery: string;
     nominationsList: MovieModel[];
+    displayMovieInfo:(imdbID: string) => any;
     onNomination: (movie: MovieModel) => void;
 };
 
@@ -17,6 +18,7 @@ const Results = ({
     nominationsList,
     currentQuery,
     onNomination,
+    displayMovieInfo,
 }: ResultsProps) => {
     const [text, setText] = useState<string>("");
 
@@ -50,8 +52,11 @@ const Results = ({
                             icon="plus"
                             disableButton={shouldButtonBeDisabled(entry)}
                             buttonType={ButtonType.Primary}
-                            click={() => {
+                            onButtonClick={() => {
                                 onNomination(entry);
+                            }}
+                            onTextClick={() => {
+                                displayMovieInfo(entry.imdbID);
                             }}
                             key={entry.imdbID}
                             data={entry}

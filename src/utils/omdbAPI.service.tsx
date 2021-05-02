@@ -1,7 +1,8 @@
 import axios from "axios";
+import { DetailedMovieModel } from "../models/detailedMovie.model";
 import { MovieModel } from "../models/movie.model";
 
-// See http://www.omdbapi.com/ for API documentation
+// See https://www.omdbapi.com/ for API documentation
 const OMDB_URL = "https://www.omdbapi.com/";
 const OMDB_API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
@@ -17,7 +18,7 @@ export const getMoviesByKeywords = async (keywords: string) => {
             },
         })
         .then((response) => {
-            const movies: [MovieModel] = response.data.Search;
+            const movies: MovieModel[] = response.data.Search;
 
             // Return empty list instead of undefined
             if (!movies) {
@@ -39,4 +40,25 @@ export const getMoviesByKeywords = async (keywords: string) => {
         .catch((error) => {
             return error;
         });
+};
+
+export const getMovieByImdbID = async (imdbID: string) => {
+
+    return axios
+    .get(OMDB_URL, {
+        params: {
+            apikey: OMDB_API_KEY,
+            i: imdbID,
+            type: "movie",
+        },
+    })
+    .then((response) => {
+
+        const movie: DetailedMovieModel = response.data;
+        return movie;
+
+    })
+    .catch((error) => {
+        return error;
+    });
 };

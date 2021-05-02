@@ -10,6 +10,7 @@ type NominationsProps = {
     onRemoveNomination: (entry: MovieModel) => any;
     onClearNominations: () => any;
     onSaveNominations: (nominations: MovieModel[]) => any;
+    displayMovieInfo:(imdbID: string) => any;
     nominationsList: MovieModel[];
 };
 
@@ -18,6 +19,7 @@ const Nominations = ({
     onRemoveNomination,
     onClearNominations,
     onSaveNominations,
+    displayMovieInfo,
 }: NominationsProps) => {
     const [text, setText] = useState<string>("");
     const [
@@ -44,9 +46,10 @@ const Nominations = ({
                             icon="minus"
                             disableButton={false}
                             buttonType={ButtonType.Secondary}
-                            click={() => {
+                            onButtonClick={() => {
                                 onRemoveNomination(entry);
                             }}
+                            onTextClick={() => {displayMovieInfo(entry.imdbID)}}
                             key={entry.imdbID}
                             data={entry}
                         />
@@ -57,7 +60,7 @@ const Nominations = ({
                 <div className="nominations-list-operation-buttons">
                     <Button
                         type={ButtonType.Blank}
-                        text="Clear"
+                        icon="times"
                         onClick={onClearNominations}
                         disabled={false}
                     />
