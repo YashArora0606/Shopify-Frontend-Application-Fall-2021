@@ -150,7 +150,7 @@ const App = () => {
                         </div>
 
                         <header className="header">
-                            {"Welcome to the  "}
+                            {"Welcome to the "}
                             <span
                                 style={{
                                     color: enabledTheme.accent,
