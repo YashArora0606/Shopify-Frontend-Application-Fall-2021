@@ -20,7 +20,7 @@ window.matchMedia =
 
 describe("Test application functionality", () => {
     it("Header renders with desired title", () => {
-        const desiredText = "Welcome to the Shoppies! SHOULD_FAIL";
+        const desiredText = "Welcome to the Shoppies!";
         const wrapper = mount(
             <AppProvider i18n={en}>
                 <App />
