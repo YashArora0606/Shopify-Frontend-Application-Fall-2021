@@ -1,7 +1,6 @@
 .movie-info-area {
     display: flex;
     flex-direction: row;
-    // outline: 2px solid red;
     padding: 1rem;
 }
 
@@ -9,6 +8,8 @@
     width: 100%;
     margin-top: 2rem;
     margin-left: 3rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .movie-poster {
@@ -44,6 +45,7 @@
 .movie-nomination-button {
     float: right;
     padding-top: 2rem;
+    flex-grow: 1;
 }
 
 @media (max-width: 768px) {

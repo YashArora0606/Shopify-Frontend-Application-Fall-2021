@@ -70,12 +70,7 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeModel }>`
   }
 
   .Polaris-Modal-CloseButton:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-    background: ${({ theme }) => `${theme.accent}`};
-    filter: brightness(90%);
-    .Polaris-Icon__Svg {
-      fill: ${({ theme }) => `${theme.background} !important`};
-    }
+    background: ${({ theme }) => `${theme.container}`};
   }
 
   @media (max-width: 768px) {
