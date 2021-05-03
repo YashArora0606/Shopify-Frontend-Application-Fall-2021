@@ -54,7 +54,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 Launches the test runner and generates an html view of the code coverage.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run cover`
+### `npm run pretty`
 
 Cleans up all code using the prettier configurations.
 
