@@ -31,6 +31,8 @@ Deployed Project Link: https://shopify-frontend-yash-arora.netlify.app/
 - All tests are written using Jest/Enzyme, and test the functionality of the application. See **Available Scripts** for more information about testing and coverage!
 #### CI/CD
 - This app is deployed via [Netlify](https://www.netlify.com/), and runs tests upon pushes to the [Github Repository](https://github.com/YashArora0606/Shopify-Frontend-Application-Fall-2021/) master branch. Builds must pass all tests before being automatically deployed to [production](https://shopify-frontend-yash-arora.netlify.app/).
+#### Mobile Compatibility
+- The application is designed to work just as well on mobile as it does on desktop!
 
 ## Available Scripts
 
