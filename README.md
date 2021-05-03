@@ -9,13 +9,13 @@ Deployed Project Link: https://shopify-frontend-yash-arora.netlify.app/
 ## What it does
 
 ### Basic functionality
-- Search OMDB and display movie results (title and year)
-- Add movies from search results to a nomination list
-- Disable nomination button if movie has already been nominated
-- View the list of nominated movies
-- Remove movies from the nominations list
-- Limit the user at 5 nominations
-- Show a banner when the user has reached 5 nominations
+- Search OMDB and display movie results (title and year).
+- Add movies from search results to a nomination list.
+- Disable nomination button if movie has already been nominated.
+- View the list of nominated movies.
+- Remove movies from the nominations list.
+- Limit the user at 5 nominations.
+- Show a banner when the user has reached 5 nominations.
 
 ### Extras!
 #### Themes
