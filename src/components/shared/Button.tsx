@@ -57,12 +57,6 @@ const Button = ({ text, onClick, type, icon, disabled }: ButtonProps) => {
                     });
                     break;
                 }
-                default: {
-                    setStyle({
-                        backgroundColor: theme.accent,
-                        color: theme.container,
-                    });
-                }
             }
         };
 
