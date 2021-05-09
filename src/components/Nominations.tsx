@@ -62,7 +62,7 @@ const Nominations = ({
                 <div className="nominations-list-operation-buttons">
                     <Button
                         type={ButtonType.Blank}
-                        icon="times"
+                        text="Clear All"
                         onClick={onClearNominations}
                         disabled={false}
                     />
