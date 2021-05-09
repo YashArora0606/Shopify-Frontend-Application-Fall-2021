@@ -83,6 +83,10 @@ const App = () => {
 
     const clearNominations = () => {
         setMoviesNominationsList([]);
+        window.localStorage.setItem(
+            "nominations",
+            JSON.stringify([])
+        );
     };
 
     const nominateMovie = (movie: MovieModel) => {
