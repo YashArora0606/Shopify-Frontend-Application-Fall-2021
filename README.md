@@ -2,8 +2,6 @@
 
 Deployed Project Link: https://shopify-frontend-yash-arora.netlify.app/
 
-[Shopify Frontend Fall 2021 Internship Application](https://www.shopify.ca/careers/fall-2021-frontend-developer-internship-1549282c)
-
 [Project details and requirements](https://docs.google.com/document/d/1SdR9rQpocsH5rPTOcxr9noqHRld5NJlylKO9Hf94U8U/edit#heading=h.31w9woubunro)
 
 ## What it does
